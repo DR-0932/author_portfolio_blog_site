@@ -4,11 +4,15 @@ import Statbox from "../ui/statbox"
 export default function Hero(){
 
 const styles = {
-  section : " h-dvh flex justify-center items-center border-b mx-6",
-  container: " min-w-6xl h-200 flex flex-col items-center",
-  title: "py-10 text-6xl md:text-9xl font-bold ",
-  subtitle:"text-2xl md:text-3xl font-semibold",
-  statbox:"my-56"
+  section : " h-dvh flex  items-center ",
+
+  container: " min-w-6xl w-full h-100 flex flex-col items-center mx-2",
+
+  title: " text-6xl md:text-9xl font-bold tracking-widest ",
+
+  subtitle:"text-md md:text-xl font-semibold py-3 tracking-widest px-3",
+
+  statbox:"my-96 flex "
 
 
 }
@@ -20,7 +24,7 @@ const styles = {
     <div className={styles.container}>
     
       <h1 className={styles.title}>Dhruv Rajput</h1>
-      <p className={styles.subtitle}>Book Editor , Ghost Writer ,Content Writer/Editor </p>
+      <p className={styles.subtitle}>Book Editor | Ghost Writer | Content Writer  </p>
       
       <div className={styles.statbox}>
         <Statbox

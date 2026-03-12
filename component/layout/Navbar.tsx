@@ -2,22 +2,22 @@ import Link from "next/link";
 
 const styles = {
   wrapper:
-    "w-full border-b bg-[#252525] backdrop-blur-md",
+    "w-full bg-[#f8ecdc57] backdrop-blur-md sticky top-0 z-50 ",
 
   container:
-    "mx-auto px-6 h-30 flex items-center text-zinc-200 justify-between ",
+    "mx-24 px-6 h-30 flex items-center text-black justify-between grid grid-cols-[3fr_2fr_0.6fr] ",
 
   logo:
-    "text-5xl font-semibold tracking-tight",
+    "text-4xl font-semibold tracking-tight ",
 
   nav:
-    "text-3xl text-zinc-100 hidden md:flex items-center gap-10 ",
+    "text-3xl text-black hidden md:flex items-center gap-24 ",
 
   navItem:
     "hover:text-black transition",
 
   button:
-    "text-2xl tracking-widest rounded-2xl bg-black text-white px-9 py-6  hover:opacity-90 transition",
+    "text-xl tracking-widest rounded-2xl bg-black text-white px-6 py-3 max-w-[150px]  hover:opacity-90 transition",
 };
 
 export default function Navbar() {
@@ -33,11 +33,11 @@ export default function Navbar() {
         {/* Navigation */}
         <nav className={styles.nav}>
           <Link href="/blogs" className={styles.navItem}>
-            Blogs
+            Blog
           </Link>
 
           <Link href="/categories" className={styles.navItem}>
-            Fiction
+            Projects
           </Link>
 
           <Link href="/about" className={styles.navItem}>

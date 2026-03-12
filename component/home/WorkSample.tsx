@@ -1,17 +1,17 @@
 "use client"
 
 import Accordian from "../ui/accordian"
-import { workSamples } from "../"
+import { workSamples } from "../../app/data/workSamples"
 
 export default function WorkSamples(){
 
   return (
     <>
-      <div>
-        <h1>Work Samples</h1>
+      <div className=" text-7xl mx-44 ">
+            <h1>Writing Samples</h1>
       </div>
 
-      <div className="h-256">
+      <div className="space-y-6 mx-44">
         {workSamples.map((sample, i) => (
           <Accordian
             key={i}

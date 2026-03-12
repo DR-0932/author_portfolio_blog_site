@@ -5,18 +5,19 @@ import WorkSample from "../component/home/WorkSample";
 
 export default function Page() {
   return (
-    <main className=" ">
+    <main className=" bg-[#f8ecdc57]">
       
       <div>
         <Hero />
       </div>
-      <div >
-        <WorkExperience/>
-      </div>
-      <div>
+     
+      <div className="border-b border-t h-256">
         <Testimonial/>
       </div>
       <div>
+        <WorkExperience/>
+      </div>
+      <div className="">
         <WorkSample/>
       </div>
 
