@@ -2,54 +2,36 @@
 
 import TestimonialCard from "../ui/testimonialcard"
 
-type Testimonial = {
-  quote: string
-  name: string
-  designation?: string
-  link?: string
-}
 
-const testimonials: Testimonial[] = [
+const testimonials = [
   {
-    quote: "Placeholder testimonial text.",
-    name: "Person Name",
-    designation: "Role / Description",
+    quote: " You are a smart girl.Love they way you are approaching this project. You are awesome. Keep working hard. Best of luck for whatever you are doing next ",
+    name: "Gaurav Bhainsu",
+    designation: "CEO & founder Advance Agility",
     link: "/profile"
   },
   {
-    quote: "we really liked your approach towards. Although we had the content written from our end, we needed someone to rewrite it from an outsider perspective. We loved the angle and the concept you brought.",
+    quote: "We really liked your approach towards. Although we had the content written from our end, we needed someone to rewrite it from an outsider perspective. We loved the angle and the concept you brought.",
     name: "Tenaz Cardoz",
-    designation: "Client",
+    designation: "Founder XYZAB",
     link:"https://dribbble.com/shots/25108110-UnifiedUI-Testimonial-Sections"
   },
   {
-    quote: "Placeholder testimonial text.",
-    name: "Person Name",
-    designation: "Role / Description"
+    quote: "Palak is an exceptional creator, writer. She is an excellent storyteller. It was a nice experience to work with her. Because of her creative style, my school could win an accolade in a CBSE level competition. I wish her all the best.",
+    name: "Nidhi Agarwal",
+    designation: "English Literature Mentor"
   }
 ]
 
 const styles = {
-  section: " text-white py-32 mx-24",
 
-  container: " mx-auto",
-
+  section: "text-white py-32 mx-24 ",
+  
+  container: "mx-auto",
+  
   header: "text-xl text-[#AE572C] mb-20 tracking-widest",
-
-  grid: "grid md:grid-cols-3",
-
-  column:
-    "relative px-12 py-12 border-neutral-800 md:border-r last:border-r-0",
-
-  number: "text-xl text-[#AE572C] mb-10",
-
-  quote: "text-2xl mb-6",
-
-  text: "text-[#AE572C] text-2xl leading-relaxed mb-10",
-
-  author: "text-black text-xl",
-
-  designation: "text-blue-600 text-md"
+  
+  grid: "grid md:grid-cols-3 gap-10"
 }
 
 export default function Testimonials() {
@@ -61,29 +43,7 @@ export default function Testimonials() {
 
         <div className={styles.grid}>
           {testimonials.map((t, i) => (
-            <div key={i} className={styles.column}>
-
-              <div className={styles.number}>
-                {String(i + 1).padStart(2, "0")}
-              </div>
-
-              <div className={styles.text}>
-                {t.quote}
-              </div>
-
-              <div>
-                <div className={styles.author}>
-                  — {t.name}
-                </div>
-
-                {t.designation && (
-                  <div className={styles.designation}>
-                    {t.designation}
-                  </div>
-                )}
-              </div>
-
-            </div>
+            <TestimonialCard key={i} {...t} />
           ))}
         </div>
 

@@ -1,53 +1,54 @@
 "use client"
 
-import Link from "next/link"
-
 type TestimonialCardProps = {
   quote: string
   name: string
   designation?: string
-  link?: string
 }
 
 const styles = {
-  card: "bg-black  rounded-2xl p-8 w-100 shadow-sm",
+  card:
+    "bg-[#FAF6F1] rounded-2xl p-10 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1",
 
-  quoteIcon: "text-3xl text-gray-400 mb-4",
+  quoteIcon: "w-8 h-8 text-[#AE572C] mb-8",
 
-  text: "text-white leading-relaxed mb-6",
+  text: "text-[#AE572C] text-xl leading-relaxed mb-10",
 
-  name: "text-lg font-semibold text-white",
+  author: "text-black text-lg font-semibold",
 
-  designation: "text-sm text-white",
-
-  link: "text-xl text-blue-500 hover:underline mt-2 inline-block"
+  designation: "text-gray-500 text-md"
 }
 
 export default function TestimonialCard({
   quote,
   name,
-  designation,
-  link
+  designation
 }: TestimonialCardProps) {
   return (
     <div className={styles.card}>
-      <div className={styles.quoteIcon}>“</div>
 
-      <p className={styles.text}>{quote}</p>
+      <img
+        src="/quoteIcon.svg"
+        alt="quote"
+        className={styles.quoteIcon}
+      />
+
+      <div className={styles.text}>
+        {quote}
+      </div>
 
       <div>
-        <p className={styles.name}>— {name}</p>
+        <div className={styles.author}>
+          — {name}
+        </div>
 
         {designation && (
-          <p className={styles.designation}>{designation}</p>
-        )}
-
-        {link && (
-          <Link href={link} className={styles.link}>
-            Learn more
-          </Link>
+          <div className={styles.designation}>
+            {designation}
+          </div>
         )}
       </div>
+
     </div>
   )
 }

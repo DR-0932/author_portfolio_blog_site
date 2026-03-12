@@ -23,7 +23,7 @@ const styles = {
   <section className={styles.section}>
     <div className={styles.container}>
     
-      <h1 className={styles.title}>Dhruv Rajput</h1>
+      <h1 className={styles.title}>Palak Agarwal</h1>
       <p className={styles.subtitle}>Book Editor | Ghost Writer | Content Writer  </p>
       
       <div className={styles.statbox}>

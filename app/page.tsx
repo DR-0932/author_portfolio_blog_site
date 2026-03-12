@@ -2,6 +2,8 @@ import Hero from "@/component/home/Hero";
 import WorkExperience from "../component/home/WorkExperience";
 import Testimonial from "../component/home/Testimonial";
 import WorkSample from "../component/home/WorkSample";
+import Testcard2 from "../component/ui/card2";
+import ExpCard from "../component/ui/expCard";
 
 export default function Page() {
   return (
@@ -13,6 +15,8 @@ export default function Page() {
      
       <div className="border-b border-t h-256">
         <Testimonial/>
+      </div>
+      <div>
       </div>
       <div>
         <WorkExperience/>
