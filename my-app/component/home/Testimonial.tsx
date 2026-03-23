@@ -25,23 +25,23 @@ const testimonials = [
 
 const styles = {
 
-  section: "text-white py-40 mx-28",
+  section: "text-white mx-28 py-76",
 
   container: "mx-auto",
 
-  headingWrapper: "text-center mb-24 max-w-5xl mx-auto",
+  headingWrapper: "text-center mb-24 max-w-[76rem] mx-auto",
 
   label:   "inline-block text-sm tracking-widest text-[#AE572C] uppercase mb-5 border border-[#AE572C]/30 px-5 py-1.5 rounded-full",
 
-  heading: "text-7xl font-bold tracking-tight leading-tight text-black",
+  heading: "text-[6rem] font-bold tracking-wide leading-tight text-black",
 
-  accent:  "italic text-[#AE572C]",
+  accent:  "text-[#AE572C] ",
 
   sub:     "mt-5 text-lg text-stone-400 tracking-widest uppercase",
 
-  grid: "grid md:grid-cols-3 gap-12",
+  grid: "grid md:grid-cols-3 gap-12 py-22",
 
-  banner:       "mt-14 rounded-2xl bg-[#6b7f6b] flex items-center justify-between px-12 py-9",
+  banner:       "mt-14 rounded-2xl bg-[#C08552] flex items-center justify-between px-12 py-9",
 
   bannerText:   "text-white text-3xl font-semibold",
 

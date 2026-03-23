@@ -8,9 +8,9 @@ const styles = {
 
   container: "min-w-6xl w-full h-full flex flex-col items-center justify-center mx-2",
 
-  title: "text-7xl md:text-[11rem] font-bold tracking-widest",
+  title: "text-xl md:text-[8rem] font-bold tracking-widest",
 
-  subtitle: "text-lg md:text-2xl font-semibold py-4 tracking-widest px-3",
+  subtitle: "text-lg md:text-2xl font-semibold py-12 tracking-widest px-3",
 
   cta: "mt-10 flex gap-5",
 

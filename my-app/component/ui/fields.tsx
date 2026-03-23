@@ -9,12 +9,11 @@ type Props = {
   onChange: (val: string) => void
   placeholder?: string
   required?: boolean
-  mono?: boolean
   rows?: number
 }
 
-export default function Field({ label, value, onChange, placeholder, required, mono, rows }: Props) {
-  const cls = styles.field + (mono ? " font-mono" : "")
+export default function Field({ label, value, onChange, placeholder, required, rows }: Props) {
+  const cls = styles.field
   return (
     <div>
       <label className={styles.label}>{label}</label>

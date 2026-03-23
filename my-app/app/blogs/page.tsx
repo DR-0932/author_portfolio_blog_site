@@ -1,6 +1,12 @@
 import BlogCard from "@/component/blog/BlogCard";
 import BlogHero from "@/component/blog/BlogHero";
 
+const styles = {
+  wrapper: "bg-[#f8ecdc57]",
+  container: "max-w-5xl mx-auto px-6 py-16 space-y-8 ",
+  empty: "text-gray-400 text-center py-24",
+};
+
 type BlogFromAPI = {
   _id: string;
   title: string;
@@ -22,15 +28,23 @@ async function getBlogs(): Promise<BlogFromAPI[]> {
   }
 }
 
+function formatDate(dateStr: string) {
+  return new Date(dateStr).toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+}
+
 export default async function BlogsPage() {
   const blogs = await getBlogs();
 
   return (
-    <main className="bg-[#f8ecdc57]">
+    <main className={styles.wrapper}>
       <BlogHero />
-      <section className="max-w-5xl mx-auto px-6 py-16 space-y-8">
+      <section className={styles.container}>
         {blogs.length === 0 ? (
-          <p className="text-gray-400 text-center py-24">No blogs published yet.</p>
+          <p className={styles.empty}>No blogs published yet.</p>
         ) : (
           blogs.map((blog) => (
             <BlogCard
@@ -41,11 +55,7 @@ export default async function BlogsPage() {
               image={blog.image}
               category={blog.category}
               author="Palak Agarwal"
-              date={new Date(blog.createdAt).toLocaleDateString("en-GB", {
-                day: "numeric",
-                month: "long",
-                year: "numeric",
-              })}
+              date={formatDate(blog.createdAt)}
             />
           ))
         )}

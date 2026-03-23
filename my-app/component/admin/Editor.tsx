@@ -8,7 +8,7 @@ const styles = {
   toolbarRow: "flex items-center gap-2 px-4 py-3 border-b border-stone-100 bg-stone-50",
   toolbarBtn: "px-3 py-1.5 text-sm rounded-lg hover:bg-stone-200 transition text-gray-700",
   toolbarDivider: "w-px h-5 bg-stone-200 mx-1",
-  textarea: "w-full px-5 py-4 text-base resize-y focus:outline-none font-mono",
+  textarea: "w-full px-5 py-4 text-base resize-y focus:outline-none",
 }
 
 const toolbarItems = [
