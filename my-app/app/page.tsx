@@ -9,7 +9,7 @@ import StackingCardsDemo from "../component/ui/card2";
 
 const styles = {
   main: "bg-[#f8ecdc57]",
-  testimonialWrapper: "border-b border-t",
+  testimonialWrapper: "",
 }
 
 export default function Page() {

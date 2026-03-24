@@ -3,7 +3,7 @@
 import { useState } from "react"
 
 const styles = {
-  wrapper:     "w-full py-40 bg-[#f8ecdc57]",
+  wrapper:     "w-full py-40 ",
 
   container:   "max-w-[1100] mx-auto px-24 grid grid-cols-1 md:grid-cols-2 gap-24 items-start ",
 

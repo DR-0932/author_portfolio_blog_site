@@ -7,11 +7,17 @@ type Sample = { _id: string; title: string; text: string }
 
 const styles = {
   overlay:    "fixed inset-0 z-50 flex items-center justify-center p-6",
+  
   backdrop:   "absolute inset-0 bg-black/60 backdrop-blur-sm",
-  modal:      "relative z-10 bg-white rounded-3xl max-w-5xl w-full max-h-[90vh] overflow-y-auto px-20 py-16 shadow-2xl",
+  
+  modal:      "relative z-10 bg-white rounded-3xl max-w-5xl w-full max-h-[90vh] overflow-y-auto overscroll-contain px-20 py-16 shadow-2xl",
+  
   closeBtn:   "absolute top-6 right-8 text-stone-400 hover:text-[#AE572C] text-2xl transition",
+  
   label:      "text-xs tracking-widest text-[#AE572C] uppercase mb-4",
+  
   title:      "text-5xl font-bold text-[#171717] mb-10 leading-tight",
+  
   body:       "text-stone-500 text-2xl leading-relaxed whitespace-pre-wrap",
 }
 
@@ -26,7 +32,11 @@ export default function SampleCard({
     if (!sample) return
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose()
     window.addEventListener("keydown", onKey)
-    return () => window.removeEventListener("keydown", onKey)
+    document.body.style.overflow = "hidden"
+    return () => {
+      window.removeEventListener("keydown", onKey)
+      document.body.style.overflow = ""
+    }
   }, [sample, onClose])
 
   return (

@@ -72,7 +72,7 @@ export default function AboutPage() {
         <div className={styles.hero}>
           <div className={styles.archWrapper}>
             <Image
-              src="/author.jpg"
+              src="/image.png"
               alt="Palak Agarwal"
               fill
               className="object-cover object-top grayscale"

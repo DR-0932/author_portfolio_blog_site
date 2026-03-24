@@ -132,14 +132,17 @@ export declare const AboutMeModel: mongoose.Model<{} & mongoose.DefaultTimestamp
 export declare const WorkSampleModel: mongoose.Model<{
     title: string;
     text: string;
+    image: string;
 } & mongoose.DefaultTimestampProps, {}, {}, {}, mongoose.Document<unknown, {}, {
     title: string;
     text: string;
+    image: string;
 } & mongoose.DefaultTimestampProps, {}, {
     timestamps: true;
 }> & {
     title: string;
     text: string;
+    image: string;
 } & mongoose.DefaultTimestampProps & {
     _id: mongoose.Types.ObjectId;
 } & {
@@ -149,14 +152,17 @@ export declare const WorkSampleModel: mongoose.Model<{
 }, {
     title: string;
     text: string;
+    image: string;
 } & mongoose.DefaultTimestampProps, mongoose.Document<unknown, {}, mongoose.FlatRecord<{
     title: string;
     text: string;
+    image: string;
 } & mongoose.DefaultTimestampProps>, {}, mongoose.MergeType<mongoose.DefaultSchemaOptions, {
     timestamps: true;
 }>> & mongoose.FlatRecord<{
     title: string;
     text: string;
+    image: string;
 } & mongoose.DefaultTimestampProps> & {
     _id: mongoose.Types.ObjectId;
 } & {

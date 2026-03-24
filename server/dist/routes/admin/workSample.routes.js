@@ -7,10 +7,10 @@ router.get("/", adminMiddleware, async (_req, res) => {
     res.json({ samples });
 });
 router.post("/", adminMiddleware, async (req, res) => {
-    const { title, text } = req.body;
+    const { title, text, image } = req.body;
     if (!title || !text)
         return res.status(400).json({ message: "title and text are required" });
-    const sample = await WorkSampleModel.create({ title, text });
+    const sample = await WorkSampleModel.create({ title, text, image });
     res.status(201).json({ sample });
 });
 router.put("/:id", adminMiddleware, async (req, res) => {

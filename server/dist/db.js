@@ -91,6 +91,7 @@ const aboutMeSchema = new Schema({
 const workSampleSchema = new Schema({
     title: { type: String, required: true, maxlength: 200 },
     text: { type: String, required: true, maxlength: 50000 },
+    image: { type: String, default: "" },
 }, { timestamps: true });
 /* ================= MODELS ================= */
 export const BlogModel = mongoose.model("Blog", blogSchema);

@@ -112,6 +112,7 @@ const workSampleSchema = new Schema(
   {
     title: { type: String, required: true, maxlength: 200 },
     text:  { type: String, required: true, maxlength: 50000 },
+    image: { type: String, default: "" },
   },
   { timestamps: true }
 )

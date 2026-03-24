@@ -29,7 +29,7 @@ const demoSamples: Sample[] = [
 ]
 
 const styles = {
-  wrapper: "w-full h-400",
+  wrapper: "w-full h-400 bg-[#f8ecdc57]",
   headingContainer: "px-36 pt-48",
   heading: "text-8xl font-bold tracking-tight mb-6",
   subheading: "text-stone-400 text-3xl max-w-4xl mb-24 pt-8",
@@ -57,6 +57,9 @@ export default function WorkSamples() {
     if (!section || !el) return
 
     const onWheel = (e: WheelEvent) => {
+      // Don't hijack scroll when modal is open
+      if (document.body.style.overflow === "hidden") return
+
       const atTop = el.scrollTop <= 0
       const atBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 1
 

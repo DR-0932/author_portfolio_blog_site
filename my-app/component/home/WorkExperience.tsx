@@ -33,11 +33,12 @@ const experiences = [
 ]
 
 const styles = {
-  headingWrapper: "bg-white",
+  headingWrapper: "bg-[#f8ecdc57]",
   headingContainer: "w-[90vw] max-w-[1360px] mx-auto py-[120px]",
-  headingInner: "text-center max-w-[640px] mx-auto",
+  headingInner: "text-center max-w-[800px] mx-auto ",
   heading: "text-[50px] font-bold text-[#AE572C] tracking-widest",
-  timelineWrapper: "bg-white",
+  
+  timelineWrapper: "bg-[#f8ecdc57]",
   timelineContainer: "w-[90vw] max-w-[1120px] mx-auto relative",
   timelineTrack: "absolute top-0 bottom-0 left-[calc(50%-1.5px)] w-[3px] bg-stone-200 z-0",
   timelineProgress: "absolute top-0 left-[calc(50%-1.5px)] w-[3px] bg-[#AE572C] z-1",
@@ -83,7 +84,7 @@ export default function WorkExperience() {
         <div className={styles.headingContainer}>
           <div className={styles.headingInner}>
             <h2 className={styles.heading}>
-              /// EXPERIENCE
+              Professional Experience
             </h2>
           </div>
         </div>
