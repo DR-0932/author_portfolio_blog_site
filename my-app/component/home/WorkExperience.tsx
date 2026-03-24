@@ -72,9 +72,10 @@ export default function WorkExperience() {
 
 
   const { scrollY } = useScroll()
-  const rawHeight = useTransform(scrollY, (y) =>
-    Math.min(Math.max(y - sectionTop + window.innerHeight * 0.5, 0), sectionHeight)
-  )
+  const rawHeight = useTransform(scrollY, (y) => {
+    const vh = typeof window !== "undefined" ? window.innerHeight : 0
+    return Math.min(Math.max(y - sectionTop + vh * 0.5, 0), sectionHeight)
+  })
   const lineHeight = rawHeight
 
   return (
