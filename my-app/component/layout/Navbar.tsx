@@ -5,13 +5,13 @@ const styles = {
     "w-full bg-[#f8ecdc57] backdrop-blur-md sticky top-0 z-50 ",
 
   container:
-    "mx-24 px-6 h-30 flex items-center text-black justify-between grid grid-cols-[3fr_2fr_0.6fr] ",
+    "px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64 h-20 md:h-30 flex items-center text-black justify-between",
 
   logo:
-    "text-4xl font-semibold tracking-tight ",
+    "text-2xl md:text-4xl font-semibold tracking-tight",
 
   nav:
-    "text-3xl text-black hidden md:flex items-center gap-24 ",
+    "text-xl md:text-3xl text-black hidden md:flex items-center gap-12 lg:gap-24",
 
   navItem:
     "hover:text-black transition",

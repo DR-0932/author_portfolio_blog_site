@@ -2,7 +2,7 @@
 import Image from "next/image";
 
 const styles = {
-  wrapper: "max-w-4xl mx-auto px-6 pt-16 pb-10",
+  wrapper: "px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64 pt-16 pb-10",
   category:
     "inline-block rounded-full bg-[#e7d7c7] px-3 py-1 text-xs mb-4",
   title:

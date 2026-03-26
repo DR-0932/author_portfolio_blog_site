@@ -3,19 +3,19 @@ import Link from "next/link";
 
 const styles = {
   wrapper:
-    "relative pb-56 px-6  ",
-  
+    "relative pb-16 md:pb-56 px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64",
+
   spacer:
-    " p-34",
+    "p-16 md:p-34",
 
   container:
-    "max-w-screen-2xl mx-auto",
+    "",
 
   title:
-    "text-4xl md:text-8xl font-semibold leading-tight tracking-tight",
+    "text-3xl sm:text-5xl md:text-8xl font-semibold leading-tight tracking-tight",
 
   subtitle:
-    " text-3xl font-semibold mt-12 max-w-3xl",
+    "text-base md:text-3xl font-semibold mt-6 md:mt-12 max-w-3xl",
 
   button:
     "mt-8 inline-block rounded-xl bg-[#AE572C] text-white px-6 py-3 text-sm hover:opacity-90 transition",

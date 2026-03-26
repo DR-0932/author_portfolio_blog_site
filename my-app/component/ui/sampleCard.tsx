@@ -10,15 +10,15 @@ const styles = {
   
   backdrop:   "absolute inset-0 bg-black/60 backdrop-blur-sm",
   
-  modal:      "relative z-10 bg-white rounded-3xl max-w-5xl w-full max-h-[90vh] overflow-y-auto overscroll-contain px-20 py-16 shadow-2xl",
+  modal:      "relative z-10 bg-white rounded-3xl max-w-[150rem] w-full h-[90vh] overflow-y-auto overscroll-contain px-6 py-8 md:px-20 md:py-16 shadow-2xl",
   
   closeBtn:   "absolute top-6 right-8 text-stone-400 hover:text-[#AE572C] text-2xl transition",
   
   label:      "text-xs tracking-widest text-[#AE572C] uppercase mb-4",
   
-  title:      "text-5xl font-bold text-[#171717] mb-10 leading-tight",
-  
-  body:       "text-stone-500 text-2xl leading-relaxed whitespace-pre-wrap",
+  title:      "text-2xl md:text-5xl font-bold text-[#171717] mb-6 md:mb-10 leading-tight",
+
+  body:       "text-stone-500 text-base md:text-2xl leading-relaxed whitespace-pre-wrap",
 }
 
 export default function SampleCard({

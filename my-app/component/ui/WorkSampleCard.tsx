@@ -12,7 +12,7 @@ const bgColors = [
 
 const styles = {
   wrapper:      "h-[80%] sm:h-[50%] flex-col sm:flex-row aspect-video px-8 py-10 flex w-11/12 rounded-3xl mx-auto relative cursor-pointer",
-  textWrapper:  "flex-1 flex flex-col justify-center pr-6 mr-150",
+  textWrapper:  "flex-1 flex flex-col justify-center pr-0 sm:pr-6",
   title:        "font-bold text-2xl mb-5",
   body:         "text-white/80 leading-relaxed line-clamp-4 text-xl",
   cta:          "mt-6 text-lg text-white tracking-wide",

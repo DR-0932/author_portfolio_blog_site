@@ -35,7 +35,7 @@ const components = {
 
 export default function BlogContent({ content }: { content: string }) {
   return (
-    <article className="max-w-4xl mx-auto px-6 mt-10 pb-24">
+    <article className="px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64 mt-10 pb-24">
       <ReactMarkdown components={components}>{content}</ReactMarkdown>
     </article>
   );

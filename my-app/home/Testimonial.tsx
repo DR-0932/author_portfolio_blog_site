@@ -1,6 +1,6 @@
 "use client"
 
-import TestimonialCard from "../ui/testimonialcard"
+import TestimonialCard from "../component/ui/testimonialcard"
 
 
 const testimonials = [
@@ -25,25 +25,25 @@ const testimonials = [
 
 const styles = {
 
-  section: "text-white mx-28 py-76",
+  section: "text-white px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64 py-16 md:py-76",
 
   container: "mx-auto",
 
-  headingWrapper: "text-center mb-24 max-w-[76rem] mx-auto",
+  headingWrapper: "text-center mb-12 md:mb-24 max-w-[76rem] mx-auto",
 
   label:   "inline-block text-sm tracking-widest text-[#AE572C] uppercase mb-5 border border-[#AE572C]/30 px-5 py-1.5 rounded-full",
 
-  heading: "text-[6rem] font-bold tracking-wide leading-tight text-black",
+  heading: "text-4xl sm:text-5xl md:text-[6rem] font-bold tracking-wide leading-tight text-black",
 
-  accent:  "text-[#AE572C] ",
+  accent:  "text-[#AE572C]",
 
-  sub:     "mt-5 text-lg text-stone-400 tracking-widest uppercase",
+  sub:     "mt-5 text-base md:text-lg text-stone-400 tracking-widest uppercase",
 
-  grid: "grid md:grid-cols-3 gap-12 py-22",
+  grid: "grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 py-10 md:py-22",
 
-  banner:       "mt-14 rounded-2xl bg-[#C08552] flex items-center justify-between px-12 py-9",
+  banner:       "mt-10 md:mt-14 rounded-2xl bg-[#C08552] flex flex-col md:flex-row items-start md:items-center gap-4 md:justify-between px-6 md:px-12 py-6 md:py-9",
 
-  bannerText:   "text-white text-3xl font-semibold",
+  bannerText:   "text-white text-xl md:text-3xl font-semibold",
 
   bannerBtn:    "bg-stone-900 text-white text-base font-medium px-8 py-4 rounded-xl hover:opacity-90 transition",
 }

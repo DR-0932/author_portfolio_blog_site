@@ -5,23 +5,6 @@ import { motion, useScroll, useTransform } from "motion/react"
 
 const experiences = [
   {
-    company: "Advance Agility · Internship",
-    role: "Content Writer",
-    description:
-    "Created content for digital platforms and assisted with editorial workflows, research, and documentation while working remotely with an international team.",
-    date: "Dec 2023 – May 2025 · United Kingdom · Remote",
-    number:"03"
-  },
-  
-  {
-    company: "Freelance",
-    role: "Content Writer",
-    description:
-    "Writing and editing long-form and technical content for various clients, focusing on clarity, research-driven storytelling, and structured information design.",
-    date: "Jun 2025 – Present",
-    number:"02"
-  },
-  {
     company: "Loyola Tutoring · Full-time",
     role: "Content Developer – Subject Matter Expert (English)",
     description:
@@ -30,26 +13,44 @@ const experiences = [
     number:"01"
   },
   
+
+  {
+    company: "Freelance",
+    role: "Content Writer",
+    description:
+    "Writing and editing long-form and technical content for various clients, focusing on clarity, research-driven storytelling, and structured information design.",
+    date: "Jun 2025 – Present",
+    number:"02"
+  },
+    {
+    company: "Advance Agility · Internship",
+    role: "Content Writer",
+    description:
+    "Created content for digital platforms and assisted with editorial workflows, research, and documentation while working remotely with an international team.",
+    date: "Dec 2023 – May 2025 · United Kingdom · Remote",
+    number:"03"
+  },
+  
 ]
 
 const styles = {
   headingWrapper: "bg-[#f8ecdc57]",
-  headingContainer: "w-[90vw] max-w-[1360px] mx-auto py-[120px]",
-  headingInner: "text-center max-w-[800px] mx-auto ",
-  heading: "text-[50px] font-bold text-[#AE572C] tracking-widest",
-  
+  headingContainer: "px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64 py-12 md:py-[120px]",
+  headingInner: "text-center max-w-[800px] mx-auto",
+  heading: "text-2xl md:text-[40px] font-bold text-[#AE572C] tracking-wide",
+
   timelineWrapper: "bg-[#f8ecdc57]",
-  timelineContainer: "w-[90vw] max-w-[1120px] mx-auto relative",
-  timelineTrack: "absolute top-0 bottom-0 left-[calc(50%-1.5px)] w-[3px] bg-stone-200 z-0",
-  timelineProgress: "absolute top-0 left-[calc(50%-1.5px)] w-[3px] bg-[#AE572C] z-1",
-  timelineRow: "grid grid-cols-[1fr_40px_1fr] py-20",
-  dateCell: "flex justify-end items-start pr-8",
-  dateText: "text-stone-400 text-[22px] font-medium leading-[1.2] tracking-tight sticky top-[50vh] text-right",
-  dotCell: "flex justify-center items-start",
+  timelineContainer: "px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64 relative",
+  timelineTrack: "hidden md:block absolute top-0 bottom-0 left-[calc(50%-1.5px)] w-[3px] bg-stone-200 z-0",
+  timelineProgress: "hidden md:block absolute top-0 left-[calc(50%-1.5px)] w-[3px] bg-[#AE572C] z-1",
+  timelineRow: "flex flex-col gap-2 py-8 md:grid md:grid-cols-[1fr_40px_1fr] md:py-20",
+  dateCell: "flex md:justify-end items-start md:pr-8",
+  dateText: "text-black font-bold text-base md:text-xl leading-[1.2] tracking-wide md:sticky md:top-[50vh] md:text-right text-[#AE572C]",
+  dotCell: "hidden md:flex justify-center items-start",
   dot: "w-[15px] h-[15px] rounded-full bg-[#AE572C] sticky top-[50vh] shadow-[0_0_0_8px_white] z-10 mt-2",
-  contentCell: "pl-8",
-  contentTitle: "text-[#171717] text-[20px] font-medium leading-[1.3] mb-8",
-  contentBody: "text-stone-400 mb-14 text-2xl",
+  contentCell: "md:pl-8",
+  contentTitle: "text-[#171717] text-base md:text-2xl font-medium leading-[1.3] mb-4 md:mb-8",
+  contentBody: "text-black mb-8 md:mb-14 text-base md:text-lg",
   spacer: "h-[50vh]",
 }
 

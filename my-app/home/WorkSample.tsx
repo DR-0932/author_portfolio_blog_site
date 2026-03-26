@@ -29,11 +29,11 @@ const demoSamples: Sample[] = [
 ]
 
 const styles = {
-  wrapper: "w-full h-400 bg-[#f8ecdc57]",
-  headingContainer: "px-36 pt-48",
-  heading: "text-8xl font-bold tracking-tight mb-6",
-  subheading: "text-stone-400 text-3xl max-w-4xl mb-24 pt-8",
-  label: "text-2xl text-[#AE572C] tracking-widest mb-4",
+  wrapper: "w-full h-400 bg-[#f8ecdc57] px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64",
+  headingContainer: "pt-16 md:pt-48",
+  heading: "text-3xl sm:text-4xl md:text-6xl font-bold tracking-tight mb-6",
+  subheading: "text-stone-400 text-base md:text-3xl max-w-4xl mb-12 md:mb-24 pt-4 md:pt-8",
+  label: "text-base md:text-2xl text-[#AE572C] tracking-widest mb-4",
   cardContainer: "h-225 overflow-auto text-white scrollbar-hide",
 }
 
@@ -93,7 +93,7 @@ export default function WorkSamples() {
   return (
     <section className={styles.wrapper} ref={sectionRef}>
       <div className={styles.headingContainer}>
-        <h2 className={styles.heading}>Here is a sample of my writing pieces</h2>
+        <h2 className={styles.heading}>Projects</h2>
         <p className={styles.subheading}>From ghost-written memoirs and long-form editorial essays to technical content and book edits — a selection of work across the formats I specialise in.</p>
         <p className={styles.label}> WORK SAMPLES</p>
       </div>

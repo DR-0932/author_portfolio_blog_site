@@ -3,7 +3,7 @@ import BlogHero from "@/component/blog/BlogHero";
 
 const styles = {
   wrapper: "bg-[#f8ecdc57]",
-  container: "max-w-5xl mx-auto px-6 py-16 space-y-8 ",
+  container: "px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64 py-16 space-y-8",
   empty: "text-gray-400 text-center py-24",
 };
 

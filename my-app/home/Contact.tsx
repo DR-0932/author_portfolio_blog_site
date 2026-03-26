@@ -3,15 +3,15 @@
 import { useState } from "react"
 
 const styles = {
-  wrapper:     "w-full py-40 ",
+  wrapper:     "w-full py-16 md:py-40 px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64",
 
-  container:   "max-w-[1100] mx-auto px-24 grid grid-cols-1 md:grid-cols-2 gap-24 items-start ",
+  container:   "grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-start",
 
   // left col
- 
+
   icon:        "text-4xl mb-8 text-[#AE572C]",
 
-  tagline:     "text-5xl font-semibold leading-snug mb-8",
+  tagline:     "text-2xl md:text-5xl font-semibold leading-snug mb-8",
 
   emailLink:   "text-[#AE572C] underline underline-offset-4 text-base block mb-3",
 
@@ -21,9 +21,9 @@ const styles = {
  
   formTitle:   "text-3xl font-semibold mb-10",
 
-  formGrid:    "grid grid-cols-2 gap-6",
+  formGrid:    "grid grid-cols-1 sm:grid-cols-2 gap-6",
 
-  fullWidth:   "col-span-2",
+  fullWidth:   "col-span-1 sm:col-span-2",
 
   label:       "block text-sm font-medium text-gray-400 mb-2 tracking-widest uppercase",
 
@@ -31,11 +31,11 @@ const styles = {
 
   textarea:    "w-full border-b border-stone-300 bg-transparent px-0 py-3 text-base focus:outline-none focus:border-[#AE572C] transition resize-none",
 
-  submitRow:   "col-span-2 flex justify-start mt-6",
+  submitRow:   "col-span-1 sm:col-span-2 flex justify-start mt-6",
 
   submitBtn:   "px-10 py-4 bg-[#AE572C] text-white text-base font-medium rounded-xl hover:opacity-90 transition",
 
-  successMsg:  "col-span-2 text-base text-green-600",
+  successMsg:  "col-span-1 sm:col-span-2 text-base text-green-600",
 }
 
 export default function Contact() {

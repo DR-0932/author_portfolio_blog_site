@@ -14,16 +14,16 @@ export default function Statbox({ leftBox, rightBox }: StatboxProps) {
   const styles = {
     wrapper: "w-full flex justify-center",
 
-    container: "w-234 h-34 grid grid-cols-[0.9fr_2.1fr] gap-3",
+    container: "w-full max-w-[58.5rem] flex flex-col sm:grid sm:grid-cols-[0.9fr_2.1fr] gap-3",
 
-    leftbox: "bg-black rounded-2xl flex flex-col justify-center items-center",
+    leftbox: "bg-black rounded-2xl flex flex-col justify-center items-center py-6 sm:py-0 sm:h-34",
 
-    rightbox: "bg-black rounded-2xl grid grid-cols-3 items-center divide-x divide-white/20",
+    rightbox: "bg-black rounded-2xl grid grid-cols-3 items-center divide-x divide-white/20 py-4 sm:py-0 sm:h-34",
 
-    contentR: "flex flex-col justify-center items-center px-6",
+    contentR: "flex flex-col justify-center items-center px-3 sm:px-6",
 
-    heading: "pb-2 text-xl font-semibold text-white",
-    subtitle: "text-sm text-gray-300 tracking-widest"
+    heading: "pb-1 sm:pb-2 text-base sm:text-xl font-semibold text-white",
+    subtitle: "text-xs sm:text-sm text-gray-300 tracking-widest text-center"
   }
 
   return (

@@ -1,18 +1,18 @@
 "use client"
-import Statbox from "../ui/statbox"
+import Statbox from "../component/ui/statbox"
 
 export default function Hero(){
 
 const styles = {
   section : "h-dvh flex items-center",
 
-  container: "min-w-6xl w-full h-full flex flex-col items-center justify-center mx-2",
+  container: "w-full h-full flex flex-col items-center justify-center px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64",
 
-  title: "text-xl md:text-[8rem] font-bold tracking-widest",
+  title: "text-4xl sm:text-6xl md:text-[8rem] font-bold tracking-widest text-center",
 
-  subtitle: "text-lg md:text-2xl font-semibold py-12 tracking-widest px-3",
+  subtitle: "text-base md:text-2xl font-semibold py-6 md:py-12 tracking-widest px-3 text-center",
 
-  cta: "mt-10 flex gap-5",
+  cta: "mt-6 md:mt-10 flex flex-wrap justify-center gap-4",
 
   ctaPrimary: "px-10 py-4 bg-[#AE572C] text-white text-base font-medium rounded-xl hover:opacity-90 transition",
 
