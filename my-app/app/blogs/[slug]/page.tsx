@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
-import BlogHeader from "@/component/blog/BlogHeader";
-import BlogContent from "@/component/blog/BlogContent";
+import BlogHeader from "@/blog/BlogHeader";
+import BlogContent from "@/blog/BlogContent";
 
 type Blog = {
   title: string;

@@ -1,5 +1,5 @@
-import BlogCard from "@/component/blog/BlogCard";
-import BlogHero from "@/component/blog/BlogHero";
+import BlogCard from "@/blog/BlogCard";
+import BlogHero from "@/blog/BlogHero";
 
 const styles = {
   wrapper: "bg-[#f8ecdc57]",

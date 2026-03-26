@@ -9,7 +9,7 @@ import StackingCardsDemo from "../component/ui/card2";
 
 export default function Page() {
   return (
-    <main className="bg-[#f8ecdc57]">
+    <main className="">
       <Hero />
       <Testimonial />
       <WorkSample />

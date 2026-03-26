@@ -1,30 +1,42 @@
+"use client";
+
 import Link from "next/link";
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
+import { useRef } from "react";
+
+gsap.registerPlugin(useGSAP);
 
 const styles = {
-  wrapper:
-    "w-full bg-[#f8ecdc57] backdrop-blur-md sticky top-0 z-50 ",
+  wrapper: "w-full bg-[#f8ecdc57] backdrop-blur-md sticky top-0 z-50 ",
 
   container:
     "px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64 h-20 md:h-30 flex items-center text-black justify-between",
 
-  logo:
-    "text-2xl md:text-4xl font-semibold tracking-tight",
+  logo: "text-2xl md:text-4xl font-semibold tracking-tight",
 
-  nav:
-    "text-xl md:text-3xl text-black hidden md:flex items-center gap-12 lg:gap-24",
+  nav: "text-xl md:text-3xl text-black hidden md:flex items-center gap-12 lg:gap-24",
 
-  navItem:
-    "hover:text-black transition",
+  navItem: "hover:text-black transition",
 
   button:
     "text-xl tracking-widest rounded-2xl bg-black text-white px-6 py-3 max-w-[150px]  hover:opacity-90 transition",
 };
 
 export default function Navbar() {
+  const navbarref = useRef(null);
+
+  useGSAP(() => {
+    gsap.from(navbarref.current, {
+      opacity: 0,
+      y: -100,
+      duration: 0.6,
+    });
+  });
+
   return (
-    <header className={styles.wrapper}>
+    <header className={styles.wrapper} ref={navbarref}>
       <div className={styles.container}>
-        
         {/* Logo */}
         <Link href="/" className={styles.logo}>
           Yvaine
