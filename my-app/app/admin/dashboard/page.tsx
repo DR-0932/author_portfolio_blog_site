@@ -7,7 +7,7 @@ import BlogFormModal, { type FormState } from "@/component/admin/BlogFormModal"
 import SampleList, { type Sample } from "@/component/admin/SampleList"
 import SampleFormModal, { type SampleFormState } from "@/component/admin/SampleFormModal"
 
-const API = "http://localhost:5000"
+const API = process.env.NEXT_PUBLIC_API_URL!
 
 const emptyBlog: FormState = {
   title: "", slug: "", excerpt: "", content: "", image: "", category: "", published: false,

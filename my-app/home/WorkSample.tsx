@@ -44,7 +44,7 @@ export default function WorkSamples() {
   const [active, setActive] = useState<Sample | null>(null)
 
   useEffect(() => {
-    fetch("http://localhost:5000/sample", { cache: "no-store" })
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/sample`, { cache: "no-store" })
       .then((r) => r.json())
       .then((data) => { if (data.samples?.length) setSamples(data.samples) })
       .catch(() => {})
