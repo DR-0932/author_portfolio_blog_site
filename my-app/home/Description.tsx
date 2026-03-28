@@ -15,7 +15,7 @@ const paragraphs = [
 const styles = {
   wrapper: " px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64  py-24 ",
 
-  container: "flex flex-col md:flex-row gap-12 md:gap-24 w-lg md:w-5xl",
+  container: "flex flex-col md:flex-row gap-8 md:gap-24 w-full",
 
   label: "text-xs font-semibold tracking-[0.3em] uppercase text-stone-500 mb-6",
 
