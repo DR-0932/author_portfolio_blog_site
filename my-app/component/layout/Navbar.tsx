@@ -3,12 +3,13 @@
 import Link from "next/link";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
+import { useLoading } from "@/context/LoadingContext";
 
 gsap.registerPlugin(useGSAP);
 
 const styles = {
-  wrapper: "w-full bg-[#f8ecdc57] backdrop-blur-md sticky top-0 z-50 ",
+  wrapper: "w-full bg-[#f8ecdc57] backdrop-blur-md sticky top-0 z-50",
 
   container:
     "px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64 h-20 md:h-30 flex items-center text-black justify-between",
@@ -24,18 +25,53 @@ const styles = {
 };
 
 export default function Navbar() {
-  const navbarref = useRef(null);
+  const navbarref = useRef<HTMLElement>(null);
 
-  useGSAP(() => {
-    gsap.from(navbarref.current, {
-      opacity: 0,
-      y: -100,
-      duration: 0.6,
-    });
-  });
+  const { loaded } = useLoading();
+
+  useGSAP(
+    () => {
+      if (!loaded) return;
+      gsap.fromTo(
+        navbarref.current,
+        { opacity: 0, y: -100 },
+        { opacity: 1, y: 0, duration: 0.6, delay: 0.1 },
+      );
+    },
+    { dependencies: [loaded] },
+  );
+
+  useEffect(() => {
+    let lastY = window.scrollY;
+
+    const onScroll = () => {
+      const currentY = window.scrollY;
+      if (currentY > lastY && currentY > 80) {
+        gsap.to(navbarref.current, {
+          y: "-100%",
+          duration: 0.3,
+          ease: "power2.in",
+        });
+      } else {
+        gsap.to(navbarref.current, {
+          y: "0%",
+          duration: 0.3,
+          ease: "power2.out",
+        });
+      }
+      lastY = currentY;
+    };
+
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <header className={styles.wrapper} ref={navbarref}>
+    <header
+      className={styles.wrapper}
+      ref={navbarref}
+      style={{ opacity: 0, transform: "translateY(-100px)" }}
+    >
       <div className={styles.container}>
         {/* Logo */}
         <Link href="/" className={styles.logo}>
@@ -48,8 +84,8 @@ export default function Navbar() {
             Blog
           </Link>
 
-          <Link href="/categories" className={styles.navItem}>
-            Projects
+          <Link href="/fiction" className={styles.navItem}>
+            Fiction
           </Link>
 
           <Link href="/about" className={styles.navItem}>

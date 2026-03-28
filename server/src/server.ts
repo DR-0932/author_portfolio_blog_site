@@ -10,6 +10,7 @@ import workSampleAdminRouter from "./routes/admin/workSample.routes.js";
 import publicBlogRouter from "./routes/public/blog.routes.js";
 import publicFictionRouter from "./routes/public/fiction.routes.js";
 import publicWorkSampleRouter from "./routes/public/workSample.routes.js";
+import contactRouter from "./routes/public/contact.routes.js";
 
 const app = express();
 
@@ -32,6 +33,7 @@ app.use("/admin/sample", workSampleAdminRouter);
 app.use("/blog", publicBlogRouter);
 app.use("/fiction", publicFictionRouter);
 app.use("/sample", publicWorkSampleRouter);
+app.use("/contact", contactRouter);
 
 /* ================= SERVER ================= */
 

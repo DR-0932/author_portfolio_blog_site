@@ -1,0 +1,11 @@
+Model Information:
+* title:	Old Lantern (game ready asset)
+* source:	https://sketchfab.com/3d-models/old-lantern-game-ready-asset-42d15b68713f4a9ba0554ea2ea7efed0
+* author:	Pixel Life (https://sketchfab.com/pixellife)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Old Lantern (game ready asset)" (https://sketchfab.com/3d-models/old-lantern-game-ready-asset-42d15b68713f4a9ba0554ea2ea7efed0) by Pixel Life (https://sketchfab.com/pixellife) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

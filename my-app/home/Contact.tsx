@@ -41,15 +41,31 @@ const styles = {
 export default function Contact() {
   const [form, setForm] = useState({ firstName: "", lastName: "", email: "", message: "" })
   const [sent, setSent] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState("")
 
-  function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
     e.preventDefault()
-    setSent(true)
-    setForm({ firstName: "", lastName: "", email: "", message: "" })
+    setLoading(true)
+    setError("")
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/contact`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      })
+      if (!res.ok) throw new Error()
+      setSent(true)
+      setForm({ firstName: "", lastName: "", email: "", message: "" })
+    } catch {
+      setError("Something went wrong. Please try again.")
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
-    <section className={styles.wrapper}>
+    <section id="Contact" className={styles.wrapper}>
       <div className={styles.container}>
 
         {/* Left — info */}
@@ -109,9 +125,12 @@ export default function Contact() {
             </div>
 
             {sent && <p className={styles.successMsg}>Message sent! I'll get back to you soon.</p>}
+            {error && <p className="col-span-1 sm:col-span-2 text-base text-red-500">{error}</p>}
 
             <div className={styles.submitRow}>
-              <button type="submit" className={styles.submitBtn}>Submit</button>
+              <button type="submit" disabled={loading} className={styles.submitBtn}>
+                {loading ? "Sending…" : "Submit"}
+              </button>
             </div>
 
           </form>
