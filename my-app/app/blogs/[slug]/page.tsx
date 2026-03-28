@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
-import BlogHeader from "@/blog/BlogHeader";
-import BlogContent from "@/blog/BlogContent";
+import BlogPostClient from "@/blog/BlogPostClient";
 
 type Blog = {
   title: string;
@@ -11,6 +10,15 @@ type Blog = {
   category: string;
   createdAt: string;
 };
+
+function extractHeadings(content: string) {
+  const matches = content.match(/^# .+$/gm) ?? [];
+  return matches.map((m) => {
+    const text = m.replace(/^# /, "");
+    const id = text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+    return { id, text };
+  });
+}
 
 async function getBlog(slug: string): Promise<Blog | null> {
   try {
@@ -26,24 +34,9 @@ async function getBlog(slug: string): Promise<Blog | null> {
 export default async function BlogPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const blog = await getBlog(slug);
-
   if (!blog) notFound();
 
-  return (
-    <main className="bg-[#f8ecdc57] min-h-screen">
-      <BlogHeader
-        title={blog.title}
-        excerpt={blog.excerpt}
-        category={blog.category}
-        author="Palak Agarwal"
-        date={new Date(blog.createdAt).toLocaleDateString("en-GB", {
-          day: "numeric",
-          month: "long",
-          year: "numeric",
-        })}
-        coverImage={blog.image}
-      />
-      <BlogContent content={blog.content} />
-    </main>
-  );
+  const headings = extractHeadings(blog.content);
+
+  return <BlogPostClient blog={blog} headings={headings} />;
 }

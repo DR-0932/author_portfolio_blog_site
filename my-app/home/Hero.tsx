@@ -2,6 +2,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { useLoading } from "@/context/LoadingContext";
+import { useDarkMode } from "@/context/DarkModeContext";
 
 const socials = [
   {
@@ -39,10 +40,8 @@ const styles = {
   sidebar:
     "absolute left-8 md:left-64 top-1/2 -translate-y-1/2 flex flex-col gap-15",
 
-  sidebarLine: "hidden",
-
   sidebarLink:
-    "flex items-center gap-2 text-lg tracking-[0.15em] uppercase text-black hover:text-[#AE572C] transition-colors duration-300",
+    "flex items-center gap-2 text-lg tracking-[0.15em] uppercase transition-colors duration-300",
 
   container:
     "w-full h-full flex flex-col items-center justify-center px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64 ",
@@ -67,6 +66,7 @@ export default function Hero() {
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const sidebarRef = useRef<HTMLDivElement>(null);
   const { loaded } = useLoading();
+  const { dark } = useDarkMode();
 
   useEffect(() => {
     if (!loaded) return;
@@ -96,7 +96,6 @@ export default function Hero() {
   return (
     <>
       <section id="section" className={styles.section}>
-        {/* Bottom social bar */}
         <div
           ref={sidebarRef}
           className={styles.sidebar}
@@ -107,6 +106,7 @@ export default function Hero() {
               key={s.label}
               href={s.href}
               className={styles.sidebarLink}
+              style={{ color: dark ? "#ffffff" : "#000000" }}
               target="_blank"
               rel="noopener noreferrer"
             >

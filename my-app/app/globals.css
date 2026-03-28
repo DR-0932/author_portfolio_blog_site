@@ -26,4 +26,20 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+  transition: background 0.4s, color 0.4s;
+}
+
+body.dark {
+  --background: #0f0f0f;
+  --foreground: #f0f0f0;
+  background: #0f0f0f;
+  color: #f0f0f0;
+}
+
+body.dark .section-bg {
+  background: #0f0f0f;
+}
+
+body.dark .section-bg-alt {
+  background: #161616;
 }

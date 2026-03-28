@@ -6,8 +6,9 @@ import { motion, AnimatePresence } from "motion/react";
 type Sample = { _id: string; title: string; text: string };
 
 const styles = {
-  overlay: "fixed inset-0 z-50 flex items-center justify-center p-6 ",
-  backdrop: "absolute inset-0 bg-black/60 backdrop-blur-sm ",
+  overlay: "fixed inset-0 z-50 flex items-center justify-center p-6  ",
+
+  backdrop: "absolute inset-0 bg-black/60 backdrop-blur-sm",
 
   modal:
     "relative z-10 max-w-4xl w-full shadow-2xl rounded-sm overflow-hidden flex ",

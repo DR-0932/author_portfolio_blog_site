@@ -1,17 +1,4 @@
-
 import Image from "next/image";
-
-const styles = {
-  wrapper: "px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64 pt-16 pb-10",
-  category:
-    "inline-block rounded-full bg-[#e7d7c7] px-3 py-1 text-xs mb-4",
-  title:
-    "text-4xl md:text-5xl font-semibold leading-tight tracking-tight",
-  excerpt: "text-lg text-gray-600 mt-4",
-  meta: "flex items-center gap-4 text-sm text-gray-500 mt-6",
-  imageWrapper: "mt-10 rounded-2xl overflow-hidden",
-  image: "w-full h-[420px] object-cover",
-};
 
 type BlogHeaderProps = {
   title: string;
@@ -20,6 +7,9 @@ type BlogHeaderProps = {
   author: string;
   date: string;
   coverImage?: string;
+  dark?: boolean;
+  readingTime?: number;
+  accent?: string;
 };
 
 export default function BlogHeader({
@@ -29,29 +19,67 @@ export default function BlogHeader({
   author,
   date,
   coverImage,
+  dark = false,
+  readingTime,
+  accent = "#AE572C",
 }: BlogHeaderProps) {
+  const text = dark ? "#f0f0f0" : "#111111";
+  const muted = dark ? "#888" : "#6b7280";
+  const badgeBg = dark ? "#1e1e1e" : "#ede0d0";
+
   return (
-    <header className={styles.wrapper}>
-      <span className={styles.category}>{category}</span>
+    <header className="px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64 pt-20 pb-10">
 
-      <h1 className={styles.title}>{title}</h1>
+      {/* Category badge */}
+      {category && (
+        <span
+          className="inline-block rounded-full px-3 py-1 text-xs tracking-[0.15em] uppercase mb-6"
+          style={{ backgroundColor: badgeBg, color: accent }}
+        >
+          {category}
+        </span>
+      )}
 
-      {excerpt && <p className={styles.excerpt}>{excerpt}</p>}
+      {/* Title */}
+      <h1
+        className="text-4xl md:text-6xl font-bold leading-tight tracking-tight max-w-3xl"
+        style={{ color: text }}
+      >
+        {title}
+      </h1>
 
-      <div className={styles.meta}>
+      {/* Excerpt */}
+      {excerpt && (
+        <p className="text-lg md:text-xl mt-5 max-w-2xl leading-relaxed" style={{ color: muted }}>
+          {excerpt}
+        </p>
+      )}
+
+      {/* Meta */}
+      <div className="flex flex-wrap items-center gap-3 mt-6 text-sm" style={{ color: muted }}>
         <span>{date}</span>
-        <span>•</span>
-        <span>{author}</span>
+        <span>·</span>
+        <span style={{ color: accent }}>{author}</span>
+        {readingTime && (
+          <>
+            <span>·</span>
+            <span>{readingTime} min read</span>
+          </>
+        )}
       </div>
 
+      {/* Divider */}
+      <div className="mt-8 h-px w-full" style={{ backgroundColor: dark ? "#2a2a2a" : "#e0d4c4" }} />
+
+      {/* Cover image */}
       {coverImage && (
-        <div className={styles.imageWrapper}>
+        <div className="mt-10 rounded-2xl overflow-hidden">
           <Image
             src={coverImage}
             alt={title}
             width={1200}
             height={600}
-            className={styles.image}
+            className="w-full h-[400px] md:h-[500px] object-cover"
             priority
           />
         </div>

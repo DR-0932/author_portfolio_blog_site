@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import { motion, useScroll, useTransform } from "motion/react"
+import { useDarkMode } from "@/context/DarkModeContext"
 
 const experiences = [
   {
@@ -12,7 +13,7 @@ const experiences = [
     date: "Nov 2025 – Present · Remote · Perth, Western Australia, Australia",
     number:"01"
   },
-  
+
 
   {
     company: "Freelance",
@@ -30,31 +31,11 @@ const experiences = [
     date: "Dec 2023 – May 2025 · United Kingdom · Remote",
     number:"03"
   },
-  
+
 ]
 
-const styles = {
-  headingWrapper: "bg-[#f8ecdc57]",
-  headingContainer: "px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64 py-12 md:py-[120px]",
-  headingInner: "text-center max-w-[800px] mx-auto",
-  heading: "text-2xl md:text-[40px] font-bold text-[#AE572C] tracking-wide",
-
-  timelineWrapper: "bg-[#f8ecdc57]",
-  timelineContainer: "px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64 relative",
-  timelineTrack: "hidden md:block absolute top-0 bottom-0 left-[calc(50%-1.5px)] w-[3px] bg-stone-200 z-0",
-  timelineProgress: "hidden md:block absolute top-0 left-[calc(50%-1.5px)] w-[3px] bg-[#AE572C] z-1",
-  timelineRow: "flex flex-col gap-2 py-8 md:grid md:grid-cols-[1fr_40px_1fr] md:py-20",
-  dateCell: "flex md:justify-end items-start md:pr-8",
-  dateText: "text-black font-bold text-base md:text-xl leading-[1.2] tracking-wide md:sticky md:top-[50vh] md:text-right text-[#AE572C]",
-  dotCell: "hidden md:flex justify-center items-start",
-  dot: "w-[15px] h-[15px] rounded-full bg-[#AE572C] sticky top-[50vh] shadow-[0_0_0_8px_white] z-10 mt-2",
-  contentCell: "md:pl-8",
-  contentTitle: "text-[#171717] text-base md:text-2xl font-medium leading-[1.3] mb-4 md:mb-8",
-  contentBody: "text-black mb-8 md:mb-14 text-base md:text-lg",
-  spacer: "h-[50vh]",
-}
-
 export default function WorkExperience() {
+  const { dark } = useDarkMode()
   const timelineRef = useRef<HTMLDivElement>(null)
   const [sectionTop, setSectionTop] = useState(0)
   const [sectionHeight, setSectionHeight] = useState(0)
@@ -71,7 +52,6 @@ export default function WorkExperience() {
     return () => window.removeEventListener("resize", update)
   }, [])
 
-
   const { scrollY } = useScroll()
   const rawHeight = useTransform(scrollY, (y) => {
     const vh = typeof window !== "undefined" ? window.innerHeight : 0
@@ -79,59 +59,92 @@ export default function WorkExperience() {
   })
   const lineHeight = rawHeight
 
+  const accent = dark ? "#ec4899" : "#AE572C"
+  const bg = dark ? "#0f0f0f" : "transparent"
+  const text = dark ? "#f0f0f0" : "#171717"
+  const headingColor = dark ? "#f0f0f0" : "#AE572C"
+  const bodyText = dark ? "#a0a0a0" : "#000000"
+  const trackColor = dark ? "#2a2a2a" : "#e7e5e4"
+  const dotShadow = dark ? "0 0 0 8px #0f0f0f" : "0 0 0 8px white"
+
   return (
-    <div>
+    <div style={{ backgroundColor: bg }}>
       {/* Heading */}
-      <div className={styles.headingWrapper}>
-        <div className={styles.headingContainer}>
-          <div className={styles.headingInner}>
-            <h2 className={styles.heading}>
-              Professional Experience
-            </h2>
-          </div>
+      <div style={{ backgroundColor: bg }}>
+        <div className="px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64 py-12 md:py-30">
+          <p className="text-xs tracking-[0.2em] uppercase mb-4" style={{ color: accent }}>
+            Career
+          </p>
+          <h2
+            className="text-4xl md:text-6xl font-bold tracking-tight"
+            style={{ color: headingColor }}
+          >
+            Professional Experience
+          </h2>
+          <p className="mt-4 text-base md:text-lg max-w-lg" style={{ color: bodyText }}>
+            A record of roles where I&apos;ve written, edited, and shaped content across industries.
+          </p>
         </div>
       </div>
 
       {/* Timeline */}
-      <div className={styles.timelineWrapper} ref={timelineRef}>
-        <div className={styles.timelineContainer}>
+      <div style={{ backgroundColor: bg }} ref={timelineRef}>
+        <div className="px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64 relative">
 
-          {/* Grey background line */}
-          <div className={styles.timelineTrack} />
+          {/* Track line */}
+          <div
+            className="hidden md:block absolute top-0 bottom-0 left-[calc(50%-1.5px)] w-[3px] z-0"
+            style={{ backgroundColor: trackColor }}
+          />
 
-          {/* Accent scroll-progress line */}
+          {/* Scroll progress line */}
           <motion.div
-            className={styles.timelineProgress}
-            style={{ height: lineHeight }}
+            className="hidden md:block absolute top-0 left-[calc(50%-1.5px)] w-[3px] z-1"
+            style={{ height: lineHeight, backgroundColor: accent }}
           />
 
           {experiences.map((exp, i) => (
-            <div key={i} className={styles.timelineRow}>
-
+            <div
+              key={i}
+              className="flex flex-col gap-2 py-8 md:grid md:grid-cols-[1fr_40px_1fr] md:py-20"
+            >
               {/* Left: date */}
-              <div className={styles.dateCell}>
-                <p className={styles.dateText}>
+              <div className="flex md:justify-end items-start md:pr-8">
+                <p
+                  className="text-base md:text-xl font-bold leading-[1.2] tracking-wide md:sticky md:top-[50vh] md:text-right"
+                  style={{ color: accent }}
+                >
                   {exp.date}
                 </p>
               </div>
 
-              {/* Center: circle aligned with line */}
-              <div className={styles.dotCell}>
-                <div className={styles.dot} />
+              {/* Center: dot */}
+              <div className="hidden md:flex justify-center items-start">
+                <div
+                  className="w-[15px] h-[15px] rounded-full sticky top-[50vh] z-10 mt-2"
+                  style={{ backgroundColor: accent, boxShadow: dotShadow }}
+                />
               </div>
 
               {/* Right: content */}
-              <div className={styles.contentCell}>
-                <p className={styles.contentTitle}>
+              <div className="md:pl-8">
+                <p
+                  className="text-base md:text-2xl font-medium leading-[1.3] mb-4 md:mb-8"
+                  style={{ color: text }}
+                >
                   <strong>{exp.company}</strong> — {exp.role}
                 </p>
-                <p className={styles.contentBody}>{exp.description}</p>
+                <p
+                  className="mb-8 md:mb-14 text-base md:text-lg"
+                  style={{ color: bodyText }}
+                >
+                  {exp.description}
+                </p>
               </div>
-
             </div>
           ))}
         </div>
-        <div className={styles.spacer} />
+        <div className="h-[50vh]" />
       </div>
     </div>
   )

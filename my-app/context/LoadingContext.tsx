@@ -9,8 +9,15 @@ const LoadingContext = createContext<LoadingContextType>({
 });
 
 export function LoadingProvider({ children }: { children: React.ReactNode }) {
-  const [loaded, setLoaded] = useState(false);
-  const markLoaded = useCallback(() => setLoaded(true), []);
+  const [loaded, setLoaded] = useState(
+    () => typeof window !== "undefined" && sessionStorage.getItem("siteLoaded") === "true"
+  );
+
+  const markLoaded = useCallback(() => {
+    sessionStorage.setItem("siteLoaded", "true");
+    setLoaded(true);
+  }, []);
+
   return (
     <LoadingContext.Provider value={{ loaded, markLoaded }}>
       {children}

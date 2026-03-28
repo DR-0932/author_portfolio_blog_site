@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { type Sample } from "@/component/ui/WorkSampleCard";
 import SampleCard from "@/component/ui/sampleCardModal";
 import gsap from "gsap";
+import { useDarkMode } from "@/context/DarkModeContext";
 
 const demoSamples: (Sample & { service: string; image: string })[] = [
   {
@@ -11,7 +12,7 @@ const demoSamples: (Sample & { service: string; image: string })[] = [
     service: "GHOST WRITING",
     image:
       "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=800&auto=format&fit=crop&q=60",
-    text: "We are all aware that Artificial Intelligence is shaking up the content writing world and it has got writers sweating. Let’s face it, AI can curate articles, blog posts, and even snappy social media posts in seconds. And if we look at the numbers then, a 2023 study from McKinsey estimated that 30% of current jobs, including writing, could be automated by 2030. While AI reduces the time taken to craft engaging posts, it lacks soul and depth. It can mimic a particular writing style, but it cannot create quirky stories or strong headed opinions that compel readers to feel and lean in.Talking about the impact AI has on content writing jobs, LinkedIn’s 2024 jobs report shows a 15% surge in hybrid roles that requires blending writing with AI skills. Writers who edit AI drafts or specialize in niche fields are still in demand, as clients crave human finesse. Paul Roetzer of the Marketing AI Institute says, “AI won’t replace writers, but writers using AI will outshine those who don’t.” Also, the World Economic Forum’s 2023 report predicts 23% of jobs will shift by 2027, with AI leading the change. Writers must find a common ground- use AI for grunt work, master its tools, and focus on storytelling. AI is here not to replace but to assist. So, grab a coffee, learn the tech, and keep weaving tales no bot can touch. The future is human plus AI—embrace it..",
+    text: "We are all aware that Artificial Intelligence is shaking up the content writing world and it has got writers sweating. Let's face it, AI can curate articles, blog posts, and even snappy social media posts in seconds. And if we look at the numbers then, a 2023 study from McKinsey estimated that 30% of current jobs, including writing, could be automated by 2030. While AI reduces the time taken to craft engaging posts, it lacks soul and depth. It can mimic a particular writing style, but it cannot create quirky stories or strong headed opinions that compel readers to feel and lean in. Talking about the impact AI has on content writing jobs, LinkedIn's 2024 jobs report shows a 15% surge in hybrid roles that requires blending writing with AI skills. Writers who edit AI drafts or specialize in niche fields are still in demand, as clients crave human finesse. Paul Roetzer of the Marketing AI Institute says AI won't replace writers, but writers using AI will outshine those who don't. Also, the World Economic Forum's 2023 report predicts 23% of jobs will shift by 2027, with AI leading the change. Writers must find a common ground - use AI for grunt work, master its tools, and focus on storytelling. AI is here not to replace but to assist. So, grab a coffee, learn the tech, and keep weaving tales no bot can touch. The future is human plus AI - embrace it.",
   },
   {
     _id: "2",
@@ -40,21 +41,31 @@ const demoSamples: (Sample & { service: string; image: string })[] = [
 ];
 
 const styles = {
-  wrapper: "relative w-full bg- px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64 py-56",
-  header:
-    "grid grid-cols-[3rem_1fr_12rem_4rem] border-b border-stone-700 pb-8 mb-2",
-  headerCell: "text-md tracking-[0.2em] text uppercase",
-  row: "grid grid-cols-[3rem_1fr_12rem_4rem] items-center border-b border-stone-800 py-14 cursor-pointer transition-colors duration-300",
-  number: "text-lg text- tracking-widest",
-  title:
-    "text-2xl md:text-4xl text- font-light tracking-wide inline-block origin-left",
-  service: "text-xs tracking-[0.2em] text- uppercase",
-  arrow: "text-stone-500 text-xl justify-self-end transition-all duration-300",
-  image:
-    "fixed left-1/2 top-1/2 -translate-y-1/2 w-90 h-64 rounded-lg overflow-hidden pointer-events-none z-40 opacity-0",
+  wrapper: "w-full px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64 py-64",
+
+  headingWrapper: "mb-12",
+  heading: "text-6xl md:text-8xl font-bold tracking-tight inline",
+  count: "text-xl md:text-2xl font-light text-stone-400 ml-2",
+
+  body: "grid grid-cols-[1fr_2.5fr] gap-8",
+
+  sidebar: "flex flex-col gap-6",
+  sidebarLabel: "text-xs tracking-[0.2em] uppercase text-stone-400 mb-3",
+  sidebarText: "text-lg leading-relaxed",
+  sidebarImage: "relative w-full aspect-4/3 overflow-hidden opacity-0 mt-2 [mask-image:radial-gradient(ellipse_80%_80%_at_50%_50%,black_60%,transparent_100%)]",
+
+  listWrapper: "",
+  columnHeaders:
+    "grid grid-cols-[12rem_1fr] border-b border-stone-300 pb-3 mb-1",
+  headerCell: "text-sm tracking-[0.2em] uppercase text-stone-400",
+
+  row: "grid grid-cols-[10rem_1fr] items-center border-b border-stone-200 py-12 cursor-pointer",
+  rowService: "text-sm tracking-[0.2em] uppercase opacity-60 px-2",
+  rowTitle: "text-xl md:text-3xl font-light tracking-wide inline-block",
 };
 
 export default function WorkSample2() {
+  const { dark } = useDarkMode();
   const [samples, setSamples] = useState(demoSamples);
   const [active, setActive] = useState<Sample | null>(null);
   const [hoveredImage, setHoveredImage] = useState<string | null>(null);
@@ -82,31 +93,26 @@ export default function WorkSample2() {
   const handleRowEnter = (index: number, image: string) => {
     setHoveredImage(image);
 
-    // Image in
     gsap.fromTo(
       imageRef.current,
       { opacity: 0, scale: 0.95, y: 10 },
       { opacity: 1, scale: 1, y: 0, duration: 0.4, ease: "power2.out" },
     );
 
-    // Title squeeze + move forward
     gsap.to(titleRefs.current[index], {
-      scaleX: 0.93,
-      x: 14,
-      color: "#AE572C",
-      duration: 0.35,
+      x: 10,
+      duration: 0.3,
       ease: "power2.out",
     });
 
-    // Row tint
     gsap.to(rowRefs.current[index], {
-      backgroundColor: "rgba(174,87,44,0.06)",
-      duration: 0.3,
+      backgroundColor: dark ? "#ec4899" : "#AE572C",
+      color: "#ffffff",
+      duration: 0.25,
     });
   };
 
   const handleRowLeave = (index: number) => {
-    // Image out
     gsap.to(imageRef.current, {
       opacity: 0,
       scale: 0.95,
@@ -115,84 +121,85 @@ export default function WorkSample2() {
       ease: "power2.in",
     });
 
-    // Title reset
     gsap.to(titleRefs.current[index], {
-      scaleX: 1,
       x: 0,
-      color: "",
-      duration: 0.35,
+      duration: 0.3,
       ease: "power2.inOut",
     });
 
-    // Row tint reset
     gsap.to(rowRefs.current[index], {
-      backgroundColor: "rgba(0,0,0,0)",
-      duration: 0.3,
-    });
-  };
-
-  const handleSectionLeave = () => {
-    gsap.to(imageRef.current, {
-      opacity: 0,
-      scale: 0.95,
-      y: 10,
-      duration: 0.3,
-      ease: "power2.in",
+      backgroundColor: "transparent",
+      color: dark ? "#f0f0f0" : "#000000",
+      duration: 0.25,
     });
   };
 
   return (
-    <section
-      id="WorkSample"
-      className={styles.wrapper}
-      onMouseLeave={handleSectionLeave}
-    >
-      {/* Fixed preview image */}
-      <div ref={imageRef} className={styles.image}>
-        {hoveredImage && (
-          <img
-            src={hoveredImage}
-            alt=""
-            className="w-full h-full object-cover"
-          />
-        )}
+    <section id="WorkSample" className={styles.wrapper}>
+      {/* Heading */}
+      <div className={styles.headingWrapper}>
+        <h2 className={styles.heading}>My Work</h2>
+        <sup className={styles.count}>({samples.length})</sup>
       </div>
 
-      {/* Column headers */}
-      <div className={styles.header}>
-        <span className={styles.headerCell}>No.</span>
-        <span className={styles.headerCell}>Project</span>
-        <span className={styles.headerCell}>Services</span>
-        <span className={`${styles.headerCell} text-right`}>View</span>
-      </div>
+      {/* Body: sidebar + list */}
+      <div className={styles.body}>
+        {/* Left sidebar */}
+        <div className={styles.sidebar}>
+          <div>
+            <p className={styles.sidebarLabel}>About</p>
+            <p className={styles.sidebarText} style={{ color: dark ? "#a0a0a0" : "#44403c" }}>
+              Here&apos;s a sample of my writing. Includes projects I&apos;ve
+              done in the past.
+            </p>
+          </div>
 
-      {/* Rows */}
-      {samples.map((sample, index) => (
-        <div
-          key={sample._id}
-          ref={(el) => {
-            rowRefs.current[index] = el;
-          }}
-          className={styles.row}
-          onClick={() => setActive(sample)}
-          onMouseEnter={() => handleRowEnter(index, sample.image)}
-          onMouseLeave={() => handleRowLeave(index)}
-        >
-          <span className={styles.number}>
-            {String(index + 1).padStart(2, "0")}
-          </span>
-          <span
-            ref={(el) => {
-              titleRefs.current[index] = el;
-            }}
-            className={styles.title}
-          >
-            {sample.title}
-          </span>
-          <span className={styles.service}>{sample.service}</span>
-          <span className={styles.arrow}>→</span>
+          {/* Hover image preview */}
+          <div ref={imageRef} className={styles.sidebarImage}>
+            {hoveredImage && (
+              <img
+                src={hoveredImage}
+                alt=""
+                className="w-full h-full object-cover"
+              />
+            )}
+          </div>
         </div>
-      ))}
+
+        {/* Right list */}
+        <div className={styles.listWrapper}>
+          {/* Column headers */}
+          <div className={styles.columnHeaders}>
+            <span className={styles.headerCell}>Type</span>
+            <span className={styles.headerCell}>Name</span>
+          </div>
+
+          {/* Rows */}
+          {samples.map((sample, index) => (
+            <div
+              key={sample._id}
+              ref={(el) => {
+                rowRefs.current[index] = el;
+              }}
+              className={styles.row}
+              style={{ backgroundColor: "transparent", color: dark ? "#f0f0f0" : "#000000" }}
+              onClick={() => setActive(sample)}
+              onMouseEnter={() => handleRowEnter(index, sample.image)}
+              onMouseLeave={() => handleRowLeave(index)}
+            >
+              <span className={styles.rowService}>{sample.service}</span>
+              <span
+                ref={(el) => {
+                  titleRefs.current[index] = el;
+                }}
+                className={styles.rowTitle}
+              >
+                {sample.title}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
 
       <SampleCard sample={active} onClose={() => setActive(null)} />
     </section>
