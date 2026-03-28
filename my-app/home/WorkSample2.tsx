@@ -41,27 +41,27 @@ const demoSamples: (Sample & { service: string; image: string })[] = [
 ];
 
 const styles = {
-  wrapper: "w-full px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64 py-64",
+  wrapper: "w-full px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64 py-24 md:py-64",
 
-  headingWrapper: "mb-12",
-  heading: "text-6xl md:text-8xl font-bold tracking-tight inline",
-  count: "text-xl md:text-2xl font-light text-stone-400 ml-2",
+  headingWrapper: "mb-8 md:mb-12",
+  heading: "text-5xl md:text-8xl font-bold tracking-tight inline",
+  count: "text-lg md:text-2xl font-light text-stone-400 ml-2",
 
-  body: "grid grid-cols-[1fr_2.5fr] gap-8",
+  body: "grid grid-cols-1 md:grid-cols-[1fr_2.5fr] gap-8",
 
   sidebar: "flex flex-col gap-6",
   sidebarLabel: "text-xs tracking-[0.2em] uppercase text-stone-400 mb-3",
-  sidebarText: "text-lg leading-relaxed",
-  sidebarImage: "relative w-full aspect-4/3 overflow-hidden opacity-0 mt-2 [mask-image:radial-gradient(ellipse_80%_80%_at_50%_50%,black_60%,transparent_100%)]",
+  sidebarText: "text-base md:text-lg leading-relaxed",
+  sidebarImage: "hidden md:block relative w-full aspect-4/3 overflow-hidden opacity-0 mt-2 [mask-image:radial-gradient(ellipse_80%_80%_at_50%_50%,black_60%,transparent_100%)]",
 
   listWrapper: "",
   columnHeaders:
-    "grid grid-cols-[12rem_1fr] border-b border-stone-300 pb-3 mb-1",
-  headerCell: "text-sm tracking-[0.2em] uppercase text-stone-400",
+    "grid grid-cols-[6rem_1fr] md:grid-cols-[12rem_1fr] border-b border-stone-300 pb-3 mb-1",
+  headerCell: "text-xs md:text-sm tracking-[0.2em] uppercase text-stone-400",
 
-  row: "grid grid-cols-[10rem_1fr] items-center border-b border-stone-200 py-12 cursor-pointer",
-  rowService: "text-sm tracking-[0.2em] uppercase opacity-60 px-2",
-  rowTitle: "text-xl md:text-3xl font-light tracking-wide inline-block",
+  row: "grid grid-cols-[6rem_1fr] md:grid-cols-[10rem_1fr] items-center border-b border-stone-200 py-6 md:py-12 cursor-pointer",
+  rowService: "text-xs md:text-sm tracking-[0.2em] uppercase opacity-60 px-1 md:px-2",
+  rowTitle: "text-lg md:text-3xl font-light tracking-wide inline-block",
 };
 
 export default function WorkSample2() {

@@ -79,7 +79,7 @@ export default function BlogHeader({
             alt={title}
             width={1200}
             height={600}
-            className="w-full h-[400px] md:h-[500px] object-cover"
+            className="w-full h-55 sm:h-80 md:h-125 object-cover"
             priority
           />
         </div>

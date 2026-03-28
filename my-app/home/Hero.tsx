@@ -38,27 +38,33 @@ const styles = {
   section: "relative z-0 h-dvh flex items-center",
 
   sidebar:
-    "absolute left-8 md:left-64 top-1/2 -translate-y-1/2 flex flex-col gap-15",
+    "hidden md:flex absolute left-8 md:left-64 top-1/2 -translate-y-1/2 flex-col gap-15",
 
   sidebarLink:
     "flex items-center gap-2 text-lg tracking-[0.15em] uppercase transition-colors duration-300",
 
   container:
-    "w-full h-full flex flex-col items-center justify-center px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64 ",
+    "w-full h-full flex flex-col items-center justify-center px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64",
 
   title:
-    "text-4xl sm:text-6xl md:text-[8rem] font-bold tracking-widest text-left",
+    "text-5xl sm:text-6xl md:text-[8rem] font-bold tracking-widest text-left",
 
   subtitle:
-    "text-base md:text-2xl font-semibold py-6 md:py-12 tracking-widest px-3 text-left",
+    "text-sm md:text-2xl font-semibold py-4 md:py-12 tracking-widest px-3 text-left",
 
-  cta: "mt-6 md:mt-10 flex flex-wrap justify-start gap-4",
+  cta: "mt-6 md:mt-10 flex flex-wrap justify-start gap-3 md:gap-4",
 
   ctaPrimary:
-    "px-10 py-4 bg-[#AE572C] text-white text-base font-medium rounded-xl hover:opacity-90 transition",
+    "px-6 md:px-10 py-3 md:py-4 bg-[#AE572C] text-white text-sm md:text-base font-medium rounded-xl hover:opacity-90 transition",
 
   ctaSecondary:
-    "px-10 py-4 border border-stone-400 text-base font-medium rounded-xl hover:border-[#AE572C] hover:text-[#AE572C] transition",
+    "px-6 md:px-10 py-3 md:py-4 border border-stone-400 text-sm md:text-base font-medium rounded-xl hover:border-[#AE572C] hover:text-[#AE572C] transition",
+
+  mobileSocials:
+    "flex md:hidden items-center gap-6 mt-6 px-3",
+
+  mobileSocialLink:
+    "flex items-center gap-1.5 text-xs tracking-[0.15em] uppercase transition-colors duration-300",
 };
 
 export default function Hero() {
@@ -139,6 +145,23 @@ export default function Hero() {
             <a href="#WorkSample" className={styles.ctaSecondary}>
               See my work
             </a>
+          </div>
+
+          {/* Mobile socials — shown only below md */}
+          <div className={styles.mobileSocials}>
+            {socials.map((s) => (
+              <a
+                key={s.label}
+                href={s.href}
+                className={styles.mobileSocialLink}
+                style={{ color: dark ? "#ffffff" : "#000000" }}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {s.icon}
+                {s.label}
+              </a>
+            ))}
           </div>
         </div>
       </section>

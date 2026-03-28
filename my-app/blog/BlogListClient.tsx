@@ -89,12 +89,12 @@ export default function BlogListClient({ blogs }: { blogs: Blog[] }) {
 
         {/* Table header */}
         <div
-          className="grid grid-cols-[9rem_1fr_9rem] pb-3 mb-1 border-b text-xs tracking-[0.2em] uppercase"
+          className="grid grid-cols-[5rem_1fr] sm:grid-cols-[9rem_1fr_9rem] pb-3 mb-1 border-b text-xs tracking-[0.2em] uppercase"
           style={{ borderColor, color: muted }}
         >
           <span>Date</span>
           <span>Title</span>
-          <span className="text-right">Category</span>
+          <span className="hidden sm:block text-right">Category</span>
         </div>
 
         {/* Rows */}
@@ -108,7 +108,7 @@ export default function BlogListClient({ blogs }: { blogs: Blog[] }) {
               key={blog._id}
               href={`/blogs/${blog.slug}`}
               ref={(el) => { rowRefs.current[i] = el; }}
-              className="grid grid-cols-[9rem_1fr_9rem] items-center border-b py-7 transition-colors duration-200"
+              className="grid grid-cols-[5rem_1fr] sm:grid-cols-[9rem_1fr_9rem] items-center border-b py-5 sm:py-7 transition-colors duration-200"
               style={{ borderColor }}
               onMouseEnter={() => handleRowEnter(i)}
               onMouseLeave={() => handleRowLeave(i)}
@@ -120,11 +120,11 @@ export default function BlogListClient({ blogs }: { blogs: Blog[] }) {
                   day: "2-digit",
                 }).replace(/\//g, ".")}
               </span>
-              <span className="text-xl md:text-2xl font-light tracking-wide pr-8">
+              <span className="text-base sm:text-xl md:text-2xl font-light tracking-wide pr-4 sm:pr-8">
                 {blog.title}
               </span>
               <span
-                className="text-xs tracking-[0.15em] uppercase text-right"
+                className="hidden sm:block text-xs tracking-[0.15em] uppercase text-right"
                 style={{ color: accent }}
               >
                 {blog.category}

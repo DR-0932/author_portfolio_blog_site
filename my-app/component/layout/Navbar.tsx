@@ -3,9 +3,10 @@
 import Link from "next/link";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLoading } from "@/context/LoadingContext";
 import { useDarkMode } from "@/context/DarkModeContext";
+import { usePathname } from "next/navigation";
 
 gsap.registerPlugin(useGSAP);
 
@@ -25,10 +26,30 @@ function MoonIcon() {
   );
 }
 
+const navLinks = [
+  { href: "/blogs", label: "Blog" },
+  { href: "/fiction", label: "Fiction" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
+];
+
 export default function Navbar() {
   const navbarref = useRef<HTMLElement>(null);
   const { loaded } = useLoading();
   const { dark, toggleDark } = useDarkMode();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  // Close menu on route change
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
+
+  // Lock body scroll when menu open
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [menuOpen]);
 
   useGSAP(() => {
     if (!loaded) return;
@@ -54,56 +75,130 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const navBg = dark ? "rgba(15,15,15,0.85)" : "rgba(248,236,220,0.34)";
+  const navBg = dark ? "rgba(15,15,15,0.5)" : "rgba(255,255,255,0.05)";
   const navText = dark ? "#e5e5e5" : "#000000";
   const accent = dark ? "#ec4899" : "#AE572C";
 
   return (
-    <header
-      ref={navbarref}
-      className="w-full backdrop-blur-md sticky top-0 z-50 transition-colors duration-500"
-      style={{ opacity: 0, transform: "translateY(-100px)", backgroundColor: navBg }}
-    >
-      <div
-        className="px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64 h-20 md:h-30 flex items-center justify-between"
-        style={{ color: navText }}
+    <>
+      <header
+        ref={navbarref}
+        className="w-full backdrop-blur-md sticky top-0 z-50 transition-colors duration-500"
+        style={{ opacity: 0, transform: "translateY(-100px)", backgroundColor: navBg }}
       >
-        {/* Logo */}
-        <Link
-          href="/"
-          className="text-2xl md:text-4xl font-semibold tracking-tight transition-colors duration-500"
-          style={{ color: dark ? "#ec4899" : "#000000" }}
+        <div
+          className="px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64 h-20 md:h-30 flex items-center justify-between"
+          style={{ color: navText }}
         >
-          Yvaine
-        </Link>
+          {/* Logo */}
+          <Link
+            href="/"
+            className="text-2xl md:text-4xl font-semibold tracking-tight transition-colors duration-500"
+            style={{ color: dark ? "#ec4899" : "#000000" }}
+          >
+            Yvaine
+          </Link>
 
-        {/* Navigation */}
-        <nav className="text-xl md:text-3xl hidden md:flex items-center gap-12 lg:gap-24">
-          <Link href="/blogs" className="hover:opacity-70 transition">Blog</Link>
-          <Link href="/fiction" className="hover:opacity-70 transition">Fiction</Link>
-          <Link href="/about" className="hover:opacity-70 transition">About</Link>
+          {/* Desktop Navigation */}
+          <nav className="text-xl md:text-3xl hidden md:flex items-center gap-12 lg:gap-24">
+            <Link href="/blogs" className="hover:opacity-70 transition">Blog</Link>
+            <Link href="/fiction" className="hover:opacity-70 transition">Fiction</Link>
+            <Link href="/about" className="hover:opacity-70 transition">About</Link>
+          </nav>
+
+          {/* Right: dark toggle + CTA + hamburger */}
+          <div className="flex items-center gap-3">
+            <button
+              onClick={toggleDark}
+              className="flex items-center gap-1.5 text-xs tracking-widest uppercase px-3 py-2 rounded-full border transition-colors duration-300"
+              style={{ borderColor: accent, color: accent }}
+            >
+              {dark ? <SunIcon /> : <MoonIcon />}
+              <span className="hidden xs:inline">{dark ? "Light" : "Dark"}</span>
+            </button>
+
+            <Link
+              href="/contact"
+              className="hidden sm:block text-sm md:text-base tracking-widest rounded-2xl px-4 md:px-5 py-2 md:py-2.5 hover:opacity-90 transition-all duration-500"
+              style={{ backgroundColor: dark ? "#ec4899" : "#000", color: "#fff" }}
+            >
+              Get In Touch
+            </Link>
+
+            {/* Hamburger — mobile only */}
+            <button
+              onClick={() => setMenuOpen((o) => !o)}
+              className="md:hidden flex flex-col justify-center items-center w-9 h-9 gap-1.5"
+              aria-label="Toggle menu"
+            >
+              <span
+                className="block w-6 h-0.5 transition-all duration-300 origin-center"
+                style={{
+                  backgroundColor: navText,
+                  transform: menuOpen ? "translateY(4px) rotate(45deg)" : "none",
+                }}
+              />
+              <span
+                className="block w-6 h-0.5 transition-all duration-300"
+                style={{
+                  backgroundColor: navText,
+                  opacity: menuOpen ? 0 : 1,
+                }}
+              />
+              <span
+                className="block w-6 h-0.5 transition-all duration-300 origin-center"
+                style={{
+                  backgroundColor: navText,
+                  transform: menuOpen ? "translateY(-4px) rotate(-45deg)" : "none",
+                }}
+              />
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* Mobile menu overlay */}
+      <div
+        className="fixed inset-0 z-40 md:hidden flex flex-col transition-all duration-300"
+        style={{
+          backgroundColor: dark ? "#0f0f0f" : "#f8ecdc",
+          opacity: menuOpen ? 1 : 0,
+          pointerEvents: menuOpen ? "auto" : "none",
+          transform: menuOpen ? "translateY(0)" : "translateY(-8px)",
+        }}
+      >
+        {/* Spacer for navbar height */}
+        <div className="h-20" />
+
+        <nav className="flex flex-col px-8 pt-10 gap-8">
+          {navLinks.map(({ href, label }) => (
+            <Link
+              key={href}
+              href={href}
+              className="text-4xl font-bold tracking-tight transition-opacity hover:opacity-60"
+              style={{ color: dark ? "#f0f0f0" : "#111111" }}
+              onClick={() => setMenuOpen(false)}
+            >
+              {label}
+            </Link>
+          ))}
         </nav>
 
-        {/* Right: dark toggle + CTA */}
-        <div className="flex items-center gap-4">
-          <button
-            onClick={toggleDark}
-            className="flex items-center gap-1.5 text-xs tracking-widest uppercase px-3 py-2 rounded-full border transition-colors duration-300"
-            style={{ borderColor: accent, color: accent }}
-          >
-            {dark ? <SunIcon /> : <MoonIcon />}
-            {dark ? "Light" : "Dark"}
-          </button>
-
+        <div className="mt-auto px-8 pb-12">
+          <div className="h-px w-full mb-8" style={{ backgroundColor: dark ? "#2a2a2a" : "#d6cbbf" }} />
+          <p className="text-xs tracking-widest uppercase mb-2" style={{ color: accent }}>
+            Get in touch
+          </p>
           <Link
             href="/contact"
-            className="text-base tracking-widest rounded-2xl px-5 py-2.5 hover:opacity-90 transition-all duration-500"
-            style={{ backgroundColor: dark ? "#ec4899" : "#000", color: "#fff" }}
+            className="inline-block text-lg font-semibold"
+            style={{ color: dark ? "#f0f0f0" : "#111111" }}
+            onClick={() => setMenuOpen(false)}
           >
-            Get In Touch
+            Start a project →
           </Link>
         </div>
       </div>
-    </header>
+    </>
   );
 }

@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import gsap from "gsap";
 import { useLoading } from "@/context/LoadingContext";
 
@@ -7,10 +8,18 @@ const STRIPS = 7;
 
 export default function LoadingScreen() {
   const { loaded, markLoaded } = useLoading();
-  const [visible, setVisible] = useState(!loaded);
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+  const [visible, setVisible] = useState(!loaded && isHome);
   const textRef = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
+    // On non-home routes, mark loaded immediately without showing screen
+    if (!isHome) {
+      markLoaded();
+      return;
+    }
+
     if (loaded) {
       setVisible(false);
       return;

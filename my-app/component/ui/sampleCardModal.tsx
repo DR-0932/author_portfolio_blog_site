@@ -6,16 +6,16 @@ import { motion, AnimatePresence } from "motion/react";
 type Sample = { _id: string; title: string; text: string };
 
 const styles = {
-  overlay: "fixed inset-0 z-50 flex items-center justify-center p-6  ",
+  overlay: "fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-6",
 
   backdrop: "absolute inset-0 bg-black/60 backdrop-blur-sm",
 
   modal:
-    "relative z-10 max-w-4xl w-full shadow-2xl rounded-sm overflow-hidden flex ",
+    "relative z-10 max-w-4xl w-full shadow-2xl rounded-t-2xl sm:rounded-sm overflow-hidden flex",
 
-  spine: "w-4 bg-gradient-to-r from-stone-500 to-stone-300 flex-shrink-0",
+  spine: "hidden sm:block w-4 bg-gradient-to-r from-stone-500 to-stone-300 flex-shrink-0",
 
-  page: "flex-1 bg-[#f5f0e8] flex flex-col px-10 md:px-16 py-10 md:py-14 max-h-[90vh] overflow-y-auto overscroll-contain",
+  page: "flex-1 bg-[#f5f0e8] flex flex-col px-6 sm:px-10 md:px-16 py-8 sm:py-10 md:py-14 max-h-[85vh] sm:max-h-[90vh] overflow-y-auto overscroll-contain",
 
   topBar:
     "flex justify-between items-baseline border-b border-stone-400 pb-3 mb-8",

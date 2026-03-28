@@ -8,13 +8,14 @@ const LoadingContext = createContext<LoadingContextType>({
   markLoaded: () => {},
 });
 
+// Module-level flag: resets on hard reload, survives client-side navigation
+let hasLoaded = false;
+
 export function LoadingProvider({ children }: { children: React.ReactNode }) {
-  const [loaded, setLoaded] = useState(
-    () => typeof window !== "undefined" && sessionStorage.getItem("siteLoaded") === "true"
-  );
+  const [loaded, setLoaded] = useState(() => hasLoaded);
 
   const markLoaded = useCallback(() => {
-    sessionStorage.setItem("siteLoaded", "true");
+    hasLoaded = true;
     setLoaded(true);
   }, []);
 

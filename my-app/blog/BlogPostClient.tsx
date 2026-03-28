@@ -37,7 +37,7 @@ const styles = {
 
   tocLink: "text-md leading-snug transition-colors duration-200 block",
 
-  content: "flex-1 min-w-0 max-w-2xl pl-8 md:pl-64",
+  content: "flex-1 min-w-0 max-w-2xl",
 };
 
 function readingTime(content: string) {

@@ -28,7 +28,7 @@ const testimonials = [
 
 const styles = {
   section:
-    "relative z-10 px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64 py-16 md:py-76",
+    "relative z-10 px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64 py-16 md:py-32",
 
   container: "mx-auto",
 

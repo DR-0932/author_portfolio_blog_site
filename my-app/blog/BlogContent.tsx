@@ -3,7 +3,7 @@
 import ReactMarkdown from "react-markdown";
 
 const styles = {
-  article: "mt-10 pb-10  w-2xl md:w-4xl  ",
+  article: "mt-10 pb-10 w-full max-w-2xl md:max-w-4xl",
 
   h1: "text-3xl md:text-4xl font-bold tracking-wide mt-14 mb-5 scroll-mt-24",
 
@@ -15,7 +15,7 @@ const styles = {
 
   h3: "text-xl font-semibold mt-8 mb-3 scroll-mt-24",
 
-  p: "text-2xl leading-[1.85] mb-5",
+  p: "text-lg md:text-2xl leading-[1.85] mb-5",
 
   strong: "font-semibold",
 
