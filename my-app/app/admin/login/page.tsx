@@ -2,11 +2,13 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useDarkMode } from "@/context/DarkModeContext";
 
 const API = process.env.NEXT_PUBLIC_API_URL!;
 
 export default function AdminLogin() {
   const router = useRouter();
+  const { dark } = useDarkMode();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -23,10 +25,7 @@ export default function AdminLogin() {
         body: JSON.stringify({ email, password }),
       });
       const data = await res.json();
-      if (!res.ok) {
-        setError(data.message ?? "Login failed");
-        return;
-      }
+      if (!res.ok) { setError(data.message ?? "Login failed"); return; }
       localStorage.setItem("admin_token", data.token);
       router.push("/admin/dashboard");
     } catch {
@@ -36,37 +35,25 @@ export default function AdminLogin() {
     }
   }
 
+  const labelCls  = "block text-xs font-medium tracking-widest uppercase mb-1 " + (dark ? "text-neutral-500" : "text-gray-600");
+  const inputCls  = "admin-field w-full border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#AE572C]/40";
+
   return (
-    <div className="min-h-screen bg-[#f8ecdc57] flex items-center justify-center">
-      <div className="bg-white rounded-2xl shadow-sm border border-stone-200 p-10 w-full max-w-sm">
+    <div className="admin-page flex items-center justify-center">
+      <div className="admin-card rounded-2xl shadow-sm p-10 w-full max-w-sm">
         <h1 className="text-2xl font-semibold tracking-tight mb-1">Admin</h1>
-        <p className="text-sm text-gray-500 mb-8">Sign in to manage content</p>
+        <p className={"text-sm mb-8 " + (dark ? "text-neutral-500" : "text-gray-500")}>
+          Sign in to manage content
+        </p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-xs font-medium text-gray-600 mb-1 tracking-widest uppercase">
-              Email
-            </label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="w-full border border-stone-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#AE572C]/40"
-            />
+            <label className={labelCls}>Email</label>
+            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required className={inputCls} />
           </div>
-
           <div>
-            <label className="block text-xs font-medium text-gray-600 mb-1 tracking-widest uppercase">
-              Password
-            </label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              className="w-full border border-stone-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#AE572C]/40"
-            />
+            <label className={labelCls}>Password</label>
+            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required className={inputCls} />
           </div>
 
           {error && <p className="text-sm text-red-500">{error}</p>}

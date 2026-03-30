@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
+import { useDarkMode } from "@/context/DarkModeContext"
 import BlogList, { type Blog } from "@/component/admin/BlogList"
 import BlogFormModal, { type FormState } from "@/component/admin/BlogFormModal"
 import SampleList, { type Sample } from "@/component/admin/SampleList"
@@ -14,25 +15,19 @@ const emptyBlog: FormState = {
 }
 
 const emptySample: SampleFormState = {
-  title: "", text: "",
+  title: "", image: "", text: "",
 }
 
-const styles = {
-  page:        "min-h-screen bg-[#f8ecdc57]",
-  header:      "bg-white border-b border-stone-200 px-10 py-6 flex items-center justify-between",
-  headerTitle: "text-xl font-semibold tracking-widest",
-  logoutBtn:   "text-base text-gray-500 hover:text-black transition",
-  tabs:        "flex gap-8 px-10 pt-8",
-  tab:         "text-base font-medium pb-2 border-b-2 transition cursor-pointer",
-  content:     "max-w-6xl mx-auto px-8 py-12",
-}
-
-function tab(active: boolean) {
-  return styles.tab + (active ? " border-[#AE572C] text-[#AE572C]" : " border-transparent text-gray-400 hover:text-black")
+function tab(active: boolean, dark: boolean) {
+  const base = "text-base font-medium pb-2 border-b-2 transition cursor-pointer"
+  return base + (active
+    ? " border-[#AE572C] text-[#AE572C]"
+    : ` border-transparent ${dark ? "text-neutral-500 hover:text-neutral-200" : "text-gray-400 hover:text-black"}`)
 }
 
 export default function AdminDashboard() {
   const router = useRouter()
+  const { dark } = useDarkMode()
   const [section, setSection] = useState<"blogs" | "samples">("blogs")
 
   // blogs
@@ -108,7 +103,7 @@ export default function AdminDashboard() {
   // sample handlers
   function openCreateSample() { setSampleForm(emptySample); setEditingSampleId(null); setSampleError(""); setShowSampleForm(true) }
   function openEditSample(s: Sample) {
-    setSampleForm({ title: s.title, text: s.text })
+    setSampleForm({ title: s.title, image: s.image ?? "", text: s.text })
     setEditingSampleId(s._id); setSampleError(""); setShowSampleForm(true)
   }
   async function handleSampleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
@@ -133,19 +128,19 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className={styles.page}>
+    <div className="admin-page">
 
-      <div className={styles.header}>
-        <h1 className={styles.headerTitle}>/// ADMIN</h1>
-        <button onClick={handleLogout} className={styles.logoutBtn}>Logout</button>
+      <div className="admin-header px-10 py-6 flex items-center justify-between">
+        <h1 className="text-xl font-semibold tracking-widest">/// ADMIN</h1>
+        <button onClick={handleLogout} className={`text-base transition ${dark ? "text-neutral-400 hover:text-white" : "text-gray-500 hover:text-black"}`}>Logout</button>
       </div>
 
-      <div className={styles.tabs}>
-        <span className={tab(section === "blogs")} onClick={() => setSection("blogs")}>Blogs</span>
-        <span className={tab(section === "samples")} onClick={() => setSection("samples")}>Writing Samples</span>
+      <div className="flex gap-8 px-10 pt-8">
+        <span className={tab(section === "blogs", dark)} onClick={() => setSection("blogs")}>Blogs</span>
+        <span className={tab(section === "samples", dark)} onClick={() => setSection("samples")}>Writing Samples</span>
       </div>
 
-      <div className={styles.content}>
+      <div className="max-w-6xl mx-auto px-8 py-12">
         {section === "blogs" ? (
           <BlogList blogs={blogs} loading={blogsLoading} onNew={openCreateBlog} onEdit={openEditBlog} onDelete={handleBlogDelete} />
         ) : (

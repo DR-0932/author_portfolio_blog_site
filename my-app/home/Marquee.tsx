@@ -19,44 +19,44 @@ const items = [
 
 const SEP = "·";
 
+const styles = {
+  wrapper: "w-full overflow-hidden",
+  row: "flex w-max py-3 md:py-4",
+  item: "flex items-center gap-5 md:gap-8 whitespace-nowrap px-5 md:px-8 text-sm md:text-lg tracking-[0.25em] uppercase font-bold --font-script",
+  sep: "text-xl ",
+};
+
 export default function Marquee() {
   const { dark } = useDarkMode();
 
   const bg = dark ? "#161616" : "#1a1a1a";
-  const text = dark ? "#ec4899" : "#f5f0e8";
-  const sepColor = dark ? "#ec4899" : "#AE572C";
+  const text = dark ? "#f5f0e8" : "#AE572C";
+  const sepColor = dark ? "#e8b87a" : "#AE572C";
 
   const row = [...items, ...items];
 
   return (
-    <div
-      className="w-full overflow-hidden"
-      style={{ backgroundColor: bg }}
-    >
+    <div className={styles.wrapper} style={{ backgroundColor: bg }}>
       {/* Row 1 — left to right */}
-      <div className="flex w-max animate-marquee py-3 md:py-4">
+      <div className={`${styles.row} animate-marquee`}>
         {row.map((item, i) => (
-          <span
-            key={i}
-            className="flex items-center gap-5 md:gap-8 whitespace-nowrap px-5 md:px-8 text-sm md:text-base tracking-[0.25em] uppercase font-medium"
-            style={{ color: text }}
-          >
+          <span key={i} className={styles.item} style={{ color: text }}>
             {item}
-            <span style={{ color: sepColor }} className="text-lg">{SEP}</span>
+            <span style={{ color: sepColor }} className={styles.sep}>
+              {SEP}
+            </span>
           </span>
         ))}
       </div>
 
       {/* Row 2 — right to left */}
-      <div className="flex w-max animate-marquee-reverse py-3 md:py-4">
+      <div className={`${styles.row} animate-marquee-reverse`}>
         {row.map((item, i) => (
-          <span
-            key={i}
-            className="flex items-center gap-5 md:gap-8 whitespace-nowrap px-5 md:px-8 text-sm md:text-base tracking-[0.25em] uppercase font-medium"
-            style={{ color: text }}
-          >
+          <span key={i} className={styles.item} style={{ color: text }}>
             {item}
-            <span style={{ color: sepColor }} className="text-lg">{SEP}</span>
+            <span style={{ color: sepColor }} className={styles.sep}>
+              {SEP}
+            </span>
           </span>
         ))}
       </div>

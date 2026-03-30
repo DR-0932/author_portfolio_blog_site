@@ -80,10 +80,10 @@ export default function WorkSample2() {
       .then((data) => {
         if (data.samples?.length)
           setSamples(
-            data.samples.map((s: Sample, i: number) => ({
+            data.samples.map((s: Sample & { image?: string }, i: number) => ({
               ...s,
               service: demoSamples[i]?.service ?? "WRITING",
-              image: demoSamples[i]?.image ?? "",
+              image: s.image ?? demoSamples[i]?.image ?? "",
             })),
           );
       })

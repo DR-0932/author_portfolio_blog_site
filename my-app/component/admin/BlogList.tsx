@@ -1,6 +1,7 @@
 "use client"
 
 import Button from "@/component/ui/Button"
+import { useDarkMode } from "@/context/DarkModeContext"
 
 export type Blog = {
   _id: string
@@ -23,55 +24,50 @@ type Props = {
   onDelete: (id: string) => void
 }
 
-const styles = {
-  toolbar: "flex items-center justify-between mb-12",
-  heading: "text-4xl font-semibold",
-  empty: "text-center py-36 text-gray-400 text-lg",
-  list: "space-y-5",
-  row: "bg-white rounded-2xl border border-stone-200 px-9 py-8 flex items-center justify-between gap-6",
-  rowLeft: "flex-1 min-w-0",
-  rowTitleRow: "flex items-center gap-4 mb-2",
-  rowTitle: "text-lg font-medium truncate",
-  rowMeta: "text-sm text-gray-400",
-  actions: "flex items-center gap-3 shrink-0",
-}
-
 function badge(published: boolean) {
   const base = "shrink-0 text-sm px-3 py-1 rounded-full"
-  return published ? `${base} bg-green-100 text-green-700` : `${base} bg-stone-100 text-stone-500`
+  return published
+    ? `${base} bg-green-100 text-green-700`
+    : `${base} bg-stone-100 text-stone-500`
 }
 
 export default function BlogList({ blogs, loading, onNew, onEdit, onDelete }: Props) {
+  const { dark } = useDarkMode()
+
+  const rowCls = `admin-card rounded-2xl px-9 py-8 flex items-center justify-between gap-6`
+  const metaCls = `text-sm mt-1 ${dark ? "text-neutral-500" : "text-gray-400"}`
+  const emptyCls = `text-center py-36 text-lg ${dark ? "text-neutral-600" : "text-gray-400"}`
+
   return (
     <div>
-      <div className={styles.toolbar}>
-        <h2 className={styles.heading}>Blogs</h2>
+      <div className="flex items-center justify-between mb-12">
+        <h2 className="text-4xl font-semibold">Blogs</h2>
         <Button variant="primary" onClick={onNew}>+ New Blog</Button>
       </div>
 
       {loading ? (
-        <p className={styles.empty}>Loading…</p>
+        <p className={emptyCls}>Loading…</p>
       ) : blogs.length === 0 ? (
-        <p className={styles.empty}>No blogs yet. Create your first one.</p>
+        <p className={emptyCls}>No blogs yet. Create your first one.</p>
       ) : (
-        <div className={styles.list}>
+        <div className="space-y-5">
           {blogs.map((blog) => (
-            <div key={blog._id} className={styles.row}>
-              <div className={styles.rowLeft}>
-                <div className={styles.rowTitleRow}>
-                  <h3 className={styles.rowTitle}>{blog.title}</h3>
+            <div key={blog._id} className={rowCls}>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-4 mb-2">
+                  <h3 className="text-lg font-medium truncate">{blog.title}</h3>
                   <span className={badge(blog.published)}>
                     {blog.published ? "Published" : "Draft"}
                   </span>
                 </div>
-                <p className={styles.rowMeta}>
+                <p className={metaCls}>
                   /{blog.slug} · {blog.views} views ·{" "}
                   {new Date(blog.createdAt).toLocaleDateString("en-GB", {
                     day: "numeric", month: "short", year: "numeric",
                   })}
                 </p>
               </div>
-              <div className={styles.actions}>
+              <div className="flex items-center gap-3 shrink-0">
                 <Button variant="ghost" onClick={() => onEdit(blog)}>Edit</Button>
                 <Button variant="danger" onClick={() => onDelete(blog._id)}>Delete</Button>
               </div>

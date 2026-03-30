@@ -4,6 +4,8 @@ import Field from "@/component/ui/fields"
 import Button from "@/component/ui/Button"
 import Toggle from "@/component/ui/Toggle"
 import Editor from "@/component/admin/Editor"
+import ImageUploadField from "@/component/admin/ImageUploadField"
+import { useDarkMode } from "@/context/DarkModeContext"
 
 export type FormState = {
   title: string
@@ -25,28 +27,12 @@ type Props = {
   error: string
 }
 
-const styles = {
-  overlay: "fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4",
-  
-  modal: "bg-white rounded-2xl shadow-xl w-full max-w-3xl max-h-[90vh] overflow-y-auto",
-
-  modalHeader: "px-10 py-8 border-b border-stone-100 flex items-center justify-between",
-
-  modalTitle: "text-2xl font-semibold",
-
-  closeBtn: "text-gray-400 hover:text-black text-2xl leading-none",
-
-  form: "px-10 py-8 space-y-6",
-
-  twoCol: "grid grid-cols-2 gap-5",
-
-  errorMsg: "text-base text-red-500",
-
-  footerRow: "flex justify-end gap-4 pt-2",
-}
-
 export default function BlogFormModal({ editingId, form, setForm, onSubmit, onClose, saving, error }: Props) {
-  
+  const { dark } = useDarkMode()
+
+  const closeCls = `text-2xl leading-none transition ${dark ? "text-neutral-500 hover:text-white" : "text-gray-400 hover:text-black"}`
+  const dividerStyle = { borderBottom: `1px solid ${dark ? "#2a2a2a" : "#e7e5e4"}` }
+
   function handleTitleChange(val: string) {
     setForm((f) => ({
       ...f,
@@ -58,54 +44,25 @@ export default function BlogFormModal({ editingId, form, setForm, onSubmit, onCl
   }
 
   return (
-    <div className={styles.overlay}>
-      <div className={styles.modal}>
-
-        <div className={styles.modalHeader}>
-         
-          <h3 className={styles.modalTitle}>{editingId ? "Edit Blog" : "New Blog"}</h3>
-          <button onClick={onClose} className={styles.closeBtn}>×</button>
-        
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+      <div className="admin-modal rounded-2xl shadow-xl w-full max-w-3xl max-h-[90vh] overflow-y-auto">
+        <div className="px-10 py-8 flex items-center justify-between" style={dividerStyle}>
+          <h3 className="text-2xl font-semibold">{editingId ? "Edit Blog" : "New Blog"}</h3>
+          <button onClick={onClose} className={closeCls}>×</button>
         </div>
 
-        <form onSubmit={onSubmit} className={styles.form}>
+        <form onSubmit={onSubmit} className="px-10 py-8 space-y-6">
+          <Field label="Title" value={form.title} onChange={handleTitleChange} required />
+          <Field label="Slug" value={form.slug} onChange={(v) => setForm((f) => ({ ...f, slug: v }))} required mono />
 
-          <Field 
-          label="Title" 
-          value={form.title} 
-          onChange={handleTitleChange} required />
-
-          <Field 
-          label="Slug" 
-          value={form.slug} 
-          onChange={(v: string) => setForm((f) => ({ ...f, slug: v }))} required mono />
-
-          <div className={styles.twoCol}>
-           
-            <Field 
-            label="Category" 
-            value={form.category} 
-            onChange={(v: string) => setForm((f) => ({ ...f, category: v }))} 
-            placeholder="e.g. Health & Medical" />
-            
-            <Field 
-            label="Image URL" 
-            value={form.image} 
-            onChange={(v: string) => setForm((f) => ({ ...f, image: v }))} 
-            placeholder="https://..." />
-          
+          <div className="grid grid-cols-2 gap-5">
+            <Field label="Category" value={form.category} onChange={(v) => setForm((f) => ({ ...f, category: v }))} placeholder="e.g. Health & Medical" />
           </div>
+          <ImageUploadField value={form.image} onChange={(url) => setForm((f) => ({ ...f, image: url }))} />
 
-          <Field 
-          label="Excerpt" 
-          value={form.excerpt} 
-          onChange={(v: string) => setForm((f) => ({ ...f, excerpt: v }))} 
-          rows={2} 
-          placeholder="Short summary shown on the blog listing page" />
+          <Field label="Excerpt" value={form.excerpt} onChange={(v) => setForm((f) => ({ ...f, excerpt: v }))} rows={2} placeholder="Short summary shown on the blog listing page" />
 
-          <Editor 
-          value={form.content} 
-          onChange={(v: string) => setForm((f) => ({ ...f, content: v }))} />
+          <Editor value={form.content} onChange={(v) => setForm((f) => ({ ...f, content: v }))} />
 
           <Toggle
             on={form.published}
@@ -113,18 +70,14 @@ export default function BlogFormModal({ editingId, form, setForm, onSubmit, onCl
             label={form.published ? "Published" : "Draft"}
           />
 
-          {error && <p className={styles.errorMsg}>{error}</p>}
+          {error && <p className="text-base text-red-500">{error}</p>}
 
-          <div className={styles.footerRow}>
+          <div className="flex justify-end gap-4 pt-2">
             <Button variant="ghost" onClick={onClose}>Cancel</Button>
-
             <Button variant="primary" type="submit" disabled={saving}>
-            
               {saving ? "Saving…" : editingId ? "Save changes" : "Create blog"}
-            
             </Button>
           </div>
-
         </form>
       </div>
     </div>

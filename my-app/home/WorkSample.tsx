@@ -56,7 +56,7 @@ export default function WorkSamples() {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/sample`, { cache: "no-store" })
       .then((r) => r.json())
       .then((data) => {
-        if (data.samples?.length) setSamples(data.samples);
+        if (data.samples?.length) setSamples(data.samples.map((s: Sample) => ({ ...s, image: s.image ?? "" })));
       })
       .catch(() => {});
   }, []);

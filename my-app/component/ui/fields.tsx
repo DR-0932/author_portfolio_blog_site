@@ -1,7 +1,6 @@
-const styles = {
-  label: "block text-sm font-medium text-gray-500 mb-2 tracking-widest uppercase",
-  field: "w-full border border-stone-200 rounded-xl px-5 py-3.5 text-base focus:outline-none focus:ring-2 focus:ring-[#AE572C]/40",
-}
+"use client"
+
+import { useDarkMode } from "@/context/DarkModeContext"
 
 type Props = {
   label: string
@@ -14,10 +13,17 @@ type Props = {
 }
 
 export default function Field({ label, value, onChange, placeholder, required, rows, mono }: Props) {
-  const cls = styles.field + (mono ? " font-mono" : "")
+  const { dark } = useDarkMode()
+
+  const labelCls = `block text-sm font-medium mb-2 tracking-widest uppercase ${dark ? "text-neutral-500" : "text-gray-500"}`
+  const fieldCls = [
+    "admin-field w-full border rounded-xl px-5 py-3.5 text-base focus:outline-none focus:ring-2 focus:ring-[#AE572C]/40",
+    mono ? "font-mono" : "",
+  ].join(" ")
+
   return (
     <div>
-      <label className={styles.label}>{label}</label>
+      <label className={labelCls}>{label}</label>
       {rows ? (
         <textarea
           value={value}
@@ -25,7 +31,7 @@ export default function Field({ label, value, onChange, placeholder, required, r
           placeholder={placeholder}
           required={required}
           rows={rows}
-          className={cls + " resize-none"}
+          className={fieldCls + " resize-none"}
         />
       ) : (
         <input
@@ -33,7 +39,7 @@ export default function Field({ label, value, onChange, placeholder, required, r
           onChange={(e) => onChange(e.target.value)}
           placeholder={placeholder}
           required={required}
-          className={cls}
+          className={fieldCls}
         />
       )}
     </div>
