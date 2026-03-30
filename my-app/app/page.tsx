@@ -1,4 +1,12 @@
+import type { Metadata } from "next";
 import Hero from "@/home/Hero";
+
+export const metadata: Metadata = {
+  title: "Palak Agarwal | Writer, Ghostwriter & Editor",
+  description:
+    "Welcome to the portfolio of Palak Agarwal — freelance writer, ghostwriter, and editor. 3+ years of experience, 200k+ words written, 50+ projects delivered.",
+  alternates: { canonical: "https://author-portfolio-blog-site.vercel.app" },
+};
 import Marquee from "@/home/Marquee";
 import Description from "@/home/Description";
 import WorkExperience from "../home/WorkExperience";

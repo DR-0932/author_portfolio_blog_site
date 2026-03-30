@@ -1,4 +1,12 @@
+import type { Metadata } from "next";
 import BlogListClient from "@/blog/BlogListClient";
+
+export const metadata: Metadata = {
+  title: "Blog",
+  description:
+    "Essays, articles, and stories by Palak Agarwal — covering writing craft, ghostwriting, content strategy, fiction, and the literary world.",
+  alternates: { canonical: "https://author-portfolio-blog-site.vercel.app/blogs" },
+};
 
 type BlogFromAPI = {
   _id: string;

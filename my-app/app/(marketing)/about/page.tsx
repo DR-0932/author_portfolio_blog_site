@@ -1,5 +1,13 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "About",
+  description:
+    "Learn about Palak Agarwal — writer, ghostwriter, and editor with 3+ years of experience helping authors, entrepreneurs, and brands find their voice.",
+  alternates: { canonical: "https://author-portfolio-blog-site.vercel.app/about" },
+};
 
 const styles = {
   wrapper: "min-h-screen bg-[#faf7f2]",
