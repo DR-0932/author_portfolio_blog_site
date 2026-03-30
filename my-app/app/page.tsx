@@ -1,4 +1,5 @@
 import Hero from "@/home/Hero";
+import Marquee from "@/home/Marquee";
 import Description from "@/home/Description";
 import WorkExperience from "../home/WorkExperience";
 import Testimonial from "../home/Testimonial";
@@ -13,6 +14,7 @@ export default function Page() {
   return (
     <main className="">
       <Hero />
+      <Marquee />
       <Description />
       <WorkSample2 />
       {/* <WorkSample /> */}
