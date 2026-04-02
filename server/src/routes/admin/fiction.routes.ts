@@ -5,16 +5,29 @@ import { adminMiddleware } from "../../middleware/admin.middleware.js";
 const router = Router();
 
 /*
+  ADMIN — GET ALL FICTION
+  GET /admin/fiction
+*/
+router.get("/", adminMiddleware, async (_req, res) => {
+  try {
+    const fictionList = await FictionModel.find().sort({ createdAt: -1 });
+    res.json({ fiction: fictionList });
+  } catch (e) {
+    res.status(500).json({ message: "Error fetching fiction" });
+  }
+});
+
+/*
   ADMIN — CREATE FICTION
   POST /admin/fiction
 */
 router.post("/", adminMiddleware, async (req, res) => {
   try {
-    const { title, slug, content, published } = req.body;
+    const { title, slug, chapters, published } = req.body;
 
-    if (!title || !slug || !content) {
+    if (!title || !slug) {
       return res.status(400).json({
-        message: "title, slug and content are required"
+        message: "title and slug are required"
       });
     }
 
@@ -28,7 +41,7 @@ router.post("/", adminMiddleware, async (req, res) => {
     const fiction = await FictionModel.create({
       title,
       slug,
-      content,
+      chapters: chapters ?? [],
       published
     });
 
@@ -50,11 +63,11 @@ router.post("/", adminMiddleware, async (req, res) => {
 router.put("/:id",adminMiddleware, async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, slug, content, published } = req.body;
+    const { title, slug, chapters, published } = req.body;
 
     const updatedFiction = await FictionModel.findByIdAndUpdate(
       id,
-      { title, slug, content, published },
+      { title, slug, chapters, published },
       {
         returnDocument: "after",
         runValidators: true

@@ -10,13 +10,23 @@ export default function PageTransition({ children }: { children: React.ReactNode
   const router = useRouter();
   const isAnimating = useRef(false);
   const hasMounted = useRef(false);
+  const prevPathname = useRef<string>("");
 
   // Reveal: strips slide up when new page mounts
   useEffect(() => {
     if (!hasMounted.current) {
       hasMounted.current = true;
-      // On first mount, just reset strips to hidden above
+      prevPathname.current = pathname;
       gsap.set(".transition-strip", { yPercent: -100 });
+      return;
+    }
+
+    const prev = prevPathname.current;
+    prevPathname.current = pathname;
+
+    // Skip strips when navigating within /fiction
+    if (prev.startsWith("/fiction") && pathname.startsWith("/fiction")) {
+      isAnimating.current = false;
       return;
     }
 
@@ -40,7 +50,6 @@ export default function PageTransition({ children }: { children: React.ReactNode
       if (isAnimating.current) return;
       isAnimating.current = true;
 
-      // Cover: strips slide down from above to cover page
       gsap.fromTo(
         ".transition-strip",
         { yPercent: -100 },
@@ -67,7 +76,8 @@ export default function PageTransition({ children }: { children: React.ReactNode
         href.startsWith("http") ||
         href.startsWith("#") ||
         href.startsWith("mailto") ||
-        href === pathname
+        href === pathname ||
+        anchor.dataset.noTransition !== undefined
       )
         return;
       e.preventDefault();
@@ -81,8 +91,7 @@ export default function PageTransition({ children }: { children: React.ReactNode
   return (
     <>
       {children}
-      {/* Strips overlay */}
-      <div className="fixed inset-0 z-[9998] flex pointer-events-none">
+      <div className="fixed inset-0 z-9998 flex pointer-events-none">
         {Array.from({ length: STRIPS }).map((_, i) => (
           <div key={i} className="transition-strip flex-1 bg-black h-full" />
         ))}

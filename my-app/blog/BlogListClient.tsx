@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { useDarkMode } from "@/context/DarkModeContext";
+import CategoryFilter from "@/component/ui/CategoryFilter";
 
 type Blog = {
   _id: string;
@@ -60,31 +61,11 @@ export default function BlogListClient({ blogs }: { blogs: Blog[] }) {
 
         {/* Category filters */}
         {categories.length > 0 && (
-          <div className="flex flex-wrap gap-2 mb-10">
-            <button
-              onClick={() => setActiveCategory(null)}
-              className="text-xs tracking-widest uppercase px-3 py-1.5 rounded-full border transition-colors duration-200"
-              style={{
-                borderColor: !activeCategory ? accent : borderColor,
-                color: !activeCategory ? accent : muted,
-              }}
-            >
-              All
-            </button>
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setActiveCategory(cat === activeCategory ? null : cat)}
-                className="text-xs tracking-widest uppercase px-3 py-1.5 rounded-full border transition-colors duration-200"
-                style={{
-                  borderColor: activeCategory === cat ? accent : borderColor,
-                  color: activeCategory === cat ? accent : muted,
-                }}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
+          <CategoryFilter
+            categories={categories}
+            active={activeCategory}
+            onChange={setActiveCategory}
+          />
         )}
 
         {/* Table header */}

@@ -72,20 +72,47 @@ export declare const BlogModel: mongoose.Model<{
 export declare const FictionModel: mongoose.Model<{
     title: string;
     slug: string;
-    content: string;
     published: boolean;
+    chapters: mongoose.Types.DocumentArray<{
+        title: string;
+        body: string;
+    }, mongoose.Types.Subdocument<mongoose.mongo.BSON.ObjectId, any, {
+        title: string;
+        body: string;
+    }> & {
+        title: string;
+        body: string;
+    }>;
 } & mongoose.DefaultTimestampProps, {}, {}, {}, mongoose.Document<unknown, {}, {
     title: string;
     slug: string;
-    content: string;
     published: boolean;
+    chapters: mongoose.Types.DocumentArray<{
+        title: string;
+        body: string;
+    }, mongoose.Types.Subdocument<mongoose.mongo.BSON.ObjectId, any, {
+        title: string;
+        body: string;
+    }> & {
+        title: string;
+        body: string;
+    }>;
 } & mongoose.DefaultTimestampProps, {}, {
     timestamps: true;
 }> & {
     title: string;
     slug: string;
-    content: string;
     published: boolean;
+    chapters: mongoose.Types.DocumentArray<{
+        title: string;
+        body: string;
+    }, mongoose.Types.Subdocument<mongoose.mongo.BSON.ObjectId, any, {
+        title: string;
+        body: string;
+    }> & {
+        title: string;
+        body: string;
+    }>;
 } & mongoose.DefaultTimestampProps & {
     _id: mongoose.Types.ObjectId;
 } & {
@@ -95,20 +122,47 @@ export declare const FictionModel: mongoose.Model<{
 }, {
     title: string;
     slug: string;
-    content: string;
     published: boolean;
+    chapters: mongoose.Types.DocumentArray<{
+        title: string;
+        body: string;
+    }, mongoose.Types.Subdocument<mongoose.mongo.BSON.ObjectId, any, {
+        title: string;
+        body: string;
+    }> & {
+        title: string;
+        body: string;
+    }>;
 } & mongoose.DefaultTimestampProps, mongoose.Document<unknown, {}, mongoose.FlatRecord<{
     title: string;
     slug: string;
-    content: string;
     published: boolean;
+    chapters: mongoose.Types.DocumentArray<{
+        title: string;
+        body: string;
+    }, mongoose.Types.Subdocument<mongoose.mongo.BSON.ObjectId, any, {
+        title: string;
+        body: string;
+    }> & {
+        title: string;
+        body: string;
+    }>;
 } & mongoose.DefaultTimestampProps>, {}, mongoose.MergeType<mongoose.DefaultSchemaOptions, {
     timestamps: true;
 }>> & mongoose.FlatRecord<{
     title: string;
     slug: string;
-    content: string;
     published: boolean;
+    chapters: mongoose.Types.DocumentArray<{
+        title: string;
+        body: string;
+    }, mongoose.Types.Subdocument<mongoose.mongo.BSON.ObjectId, any, {
+        title: string;
+        body: string;
+    }> & {
+        title: string;
+        body: string;
+    }>;
 } & mongoose.DefaultTimestampProps> & {
     _id: mongoose.Types.ObjectId;
 } & {

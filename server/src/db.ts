@@ -67,6 +67,14 @@ const blogSchema = new Schema(
 
 /* ================= FICTION SCHEMA ================= */
 
+const chapterSchema = new Schema(
+  {
+    title: { type: String, required: true, maxlength: 200 },
+    body:  { type: String, default: "", maxlength: 200000 },
+  },
+  { _id: true }
+);
+
 const fictionSchema = new Schema(
   {
     title: {
@@ -80,10 +88,9 @@ const fictionSchema = new Schema(
       unique: true,
       maxlength: 200
     },
-    content: {
-      type: String,
-      required: true,
-      maxlength: 50000
+    chapters: {
+      type: [chapterSchema],
+      default: []
     },
     published: {
       type: Boolean,

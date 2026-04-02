@@ -7,6 +7,8 @@ import BlogList, { type Blog } from "@/component/admin/BlogList"
 import BlogFormModal, { type FormState } from "@/component/admin/BlogFormModal"
 import SampleList, { type Sample } from "@/component/admin/SampleList"
 import SampleFormModal, { type SampleFormState } from "@/component/admin/SampleFormModal"
+import FictionList, { type Fiction } from "@/component/admin/FictionList"
+import FictionFormModal, { type FictionFormState } from "@/component/admin/FictionFormModal"
 
 const API = process.env.NEXT_PUBLIC_API_URL!
 
@@ -16,6 +18,10 @@ const emptyBlog: FormState = {
 
 const emptySample: SampleFormState = {
   title: "", image: "", text: "",
+}
+
+const emptyFiction: FictionFormState = {
+  title: "", slug: "", chapters: [{ title: "Chapter 1", body: "" }], published: false,
 }
 
 function tab(active: boolean, dark: boolean) {
@@ -28,7 +34,7 @@ function tab(active: boolean, dark: boolean) {
 export default function AdminDashboard() {
   const router = useRouter()
   const { dark } = useDarkMode()
-  const [section, setSection] = useState<"blogs" | "samples">("blogs")
+  const [section, setSection] = useState<"blogs" | "samples" | "fiction">("blogs")
 
   // blogs
   const [blogs, setBlogs] = useState<Blog[]>([])
@@ -47,6 +53,15 @@ export default function AdminDashboard() {
   const [editingSampleId, setEditingSampleId] = useState<string | null>(null)
   const [sampleError, setSampleError] = useState("")
   const [sampleSaving, setSampleSaving] = useState(false)
+
+  // fiction
+  const [fictions, setFictions] = useState<Fiction[]>([])
+  const [fictionLoading, setFictionLoading] = useState(true)
+  const [showFictionForm, setShowFictionForm] = useState(false)
+  const [fictionForm, setFictionForm] = useState<FictionFormState>(emptyFiction)
+  const [editingFictionId, setEditingFictionId] = useState<string | null>(null)
+  const [fictionError, setFictionError] = useState("")
+  const [fictionSaving, setFictionSaving] = useState(false)
 
   function authHeaders() {
     const token = localStorage.getItem("admin_token") ?? ""
@@ -72,10 +87,20 @@ export default function AdminDashboard() {
     } finally { setSamplesLoading(false) }
   }
 
+  async function fetchFictions() {
+    setFictionLoading(true)
+    try {
+      const res = await fetch(`${API}/admin/fiction`, { headers: authHeaders() })
+      const data = await res.json()
+      setFictions(data.fiction ?? [])
+    } finally { setFictionLoading(false) }
+  }
+
   useEffect(() => {
     if (!localStorage.getItem("admin_token")) { router.push("/admin/login"); return }
     fetchBlogs()
     fetchSamples()
+    fetchFictions()
   }, [])
 
   // blog handlers
@@ -122,6 +147,28 @@ export default function AdminDashboard() {
     fetchSamples()
   }
 
+  // fiction handlers
+  function openCreateFiction() { setFictionForm(emptyFiction); setEditingFictionId(null); setFictionError(""); setShowFictionForm(true) }
+  function openEditFiction(f: Fiction) {
+    setFictionForm({ title: f.title, slug: f.slug, chapters: f.chapters.length ? f.chapters : [{ title: "Chapter 1", body: "" }], published: f.published })
+    setEditingFictionId(f._id); setFictionError(""); setShowFictionForm(true)
+  }
+  async function handleFictionSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
+    e.preventDefault(); setFictionError(""); setFictionSaving(true)
+    try {
+      const url = editingFictionId ? `${API}/admin/fiction/${editingFictionId}` : `${API}/admin/fiction`
+      const res = await fetch(url, { method: editingFictionId ? "PUT" : "POST", headers: authHeaders(), body: JSON.stringify(fictionForm) })
+      const data = await res.json()
+      if (!res.ok) { setFictionError(data.message ?? "Something went wrong"); return }
+      setShowFictionForm(false); fetchFictions()
+    } finally { setFictionSaving(false) }
+  }
+  async function handleFictionDelete(id: string) {
+    if (!confirm("Delete this fiction?")) return
+    await fetch(`${API}/admin/fiction/${id}`, { method: "DELETE", headers: authHeaders() })
+    fetchFictions()
+  }
+
   function handleLogout() {
     localStorage.removeItem("admin_token")
     router.push("/admin/login")
@@ -138,13 +185,16 @@ export default function AdminDashboard() {
       <div className="flex gap-8 px-10 pt-8">
         <span className={tab(section === "blogs", dark)} onClick={() => setSection("blogs")}>Blogs</span>
         <span className={tab(section === "samples", dark)} onClick={() => setSection("samples")}>Writing Samples</span>
+        <span className={tab(section === "fiction", dark)} onClick={() => setSection("fiction")}>Fiction</span>
       </div>
 
       <div className="max-w-6xl mx-auto px-8 py-12">
         {section === "blogs" ? (
           <BlogList blogs={blogs} loading={blogsLoading} onNew={openCreateBlog} onEdit={openEditBlog} onDelete={handleBlogDelete} />
-        ) : (
+        ) : section === "samples" ? (
           <SampleList samples={samples} loading={samplesLoading} onNew={openCreateSample} onEdit={openEditSample} onDelete={handleSampleDelete} />
+        ) : (
+          <FictionList fictions={fictions} loading={fictionLoading} onNew={openCreateFiction} onEdit={openEditFiction} onDelete={handleFictionDelete} />
         )}
       </div>
 
@@ -154,6 +204,10 @@ export default function AdminDashboard() {
 
       {showSampleForm && (
         <SampleFormModal editingId={editingSampleId} form={sampleForm} setForm={setSampleForm} onSubmit={handleSampleSubmit} onClose={() => setShowSampleForm(false)} saving={sampleSaving} error={sampleError} />
+      )}
+
+      {showFictionForm && (
+        <FictionFormModal editingId={editingFictionId} form={fictionForm} setForm={setFictionForm} onSubmit={handleFictionSubmit} onClose={() => setShowFictionForm(false)} saving={fictionSaving} error={fictionError} />
       )}
 
     </div>
