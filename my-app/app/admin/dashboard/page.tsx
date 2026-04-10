@@ -3,12 +3,12 @@
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { useDarkMode } from "@/context/DarkModeContext"
-import BlogList, { type Blog } from "@/component/admin/BlogList"
-import BlogFormModal, { type FormState } from "@/component/admin/BlogFormModal"
-import SampleList, { type Sample } from "@/component/admin/SampleList"
-import SampleFormModal, { type SampleFormState } from "@/component/admin/SampleFormModal"
-import FictionList, { type Fiction } from "@/component/admin/FictionList"
-import FictionFormModal, { type FictionFormState } from "@/component/admin/FictionFormModal"
+import BlogList, { type Blog } from "@/components/admin/BlogList"
+import BlogFormModal, { type FormState } from "@/components/admin/BlogFormModal"
+import SampleList, { type Sample } from "@/components/admin/SampleList"
+import SampleFormModal, { type SampleFormState } from "@/components/admin/SampleFormModal"
+import FictionList, { type Fiction } from "@/components/admin/FictionList"
+import FictionFormModal, { type FictionFormState } from "@/components/admin/FictionFormModal"
 
 const API = process.env.NEXT_PUBLIC_API_URL!
 

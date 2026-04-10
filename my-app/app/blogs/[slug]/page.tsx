@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import BlogPostClient from "@/blog/BlogPostClient";
+import BlogPostClient from "@/components/blog/BlogPostClient";
 
 type Blog = {
   title: string;

@@ -4,7 +4,22 @@
       "Bash(npm install:*)",
       "Bash(npm uninstall:*)",
       "Bash(xargs grep:*)",
-      "Bash(npm run:*)"
+      "Bash(npm run:*)",
+      "Bash(cp component/ui/Button.tsx components/ui/Button.tsx)",
+      "Bash(cp component/ui/Toggle.tsx components/ui/Toggle.tsx)",
+      "Bash(cp component/ui/fields.tsx components/ui/fields.tsx)",
+      "Bash(cp component/ui/CategoryFilter.tsx components/ui/CategoryFilter.tsx)",
+      "Bash(cp component/ui/WorkSampleCard.tsx components/home/WorkSampleCard.tsx)",
+      "Bash(cp component/admin/BlogFormModal.tsx components/admin/BlogFormModal.tsx)",
+      "Bash(cp component/admin/BlogList.tsx components/admin/BlogList.tsx)",
+      "Bash(cp component/admin/Editor.tsx components/admin/Editor.tsx)",
+      "Bash(cp component/admin/FictionFormModal.tsx components/admin/FictionFormModal.tsx)",
+      "Bash(cp component/admin/FictionList.tsx components/admin/FictionList.tsx)",
+      "Bash(rm -f app/write.tsx)",
+      "Bash(rm -f app/lib/utils.ts)",
+      "Bash(rm -rf app/marketing)",
+      "Bash(rm -rf \"app/\\(marketing\\)\")",
+      "Bash(grep -v \"^$\")"
     ]
   }
 }

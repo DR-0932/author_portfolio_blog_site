@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import FictionListClient from "@/Fiction/FictionListClient";
+import FictionListClient from "@/components/fiction/FictionListClient";
 
 export const metadata: Metadata = {
   title: "Fiction",

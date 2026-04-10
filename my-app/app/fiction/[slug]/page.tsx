@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import FictionPostClient from "@/Fiction/FictionPostClient";
+import FictionPostClient from "@/components/fiction/FictionPostClient";
 
 type Chapter = { title: string; body: string };
 

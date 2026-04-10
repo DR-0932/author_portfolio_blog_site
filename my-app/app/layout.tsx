@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Poppins, Roboto_Mono, Great_Vibes, Caveat, Playwrite_IE, Fjalla_One } from "next/font/google";
-import ClientRoot from "@/component/layout/ClientRoot";
+import ClientRoot from "@/components/layout/ClientRoot";
 import "./globals.css";
 import React from "react";
 
