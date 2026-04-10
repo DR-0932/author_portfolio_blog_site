@@ -48,26 +48,39 @@ export default function Navbar() {
   // Lock body scroll when menu open
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [menuOpen]);
 
-  useGSAP(() => {
-    if (!loaded) return;
-    gsap.fromTo(
-      navbarref.current,
-      { opacity: 0, y: -100 },
-      { opacity: 1, y: 0, duration: 0.6, delay: 0.1 },
-    );
-  }, { dependencies: [loaded] });
+  useGSAP(
+    () => {
+      if (!loaded) return;
+      gsap.fromTo(
+        navbarref.current,
+        { opacity: 0, y: -100 },
+        { opacity: 1, y: 0, duration: 0.6, delay: 0.1 },
+      );
+    },
+    { dependencies: [loaded] },
+  );
 
   useEffect(() => {
     let lastY = window.scrollY;
     const onScroll = () => {
       const currentY = window.scrollY;
       if (currentY > lastY && currentY > 80) {
-        gsap.to(navbarref.current, { y: "-100%", duration: 0.3, ease: "power2.in" });
+        gsap.to(navbarref.current, {
+          y: "-100%",
+          duration: 0.3,
+          ease: "power2.in",
+        });
       } else {
-        gsap.to(navbarref.current, { y: "0%", duration: 0.3, ease: "power2.out" });
+        gsap.to(navbarref.current, {
+          y: "0%",
+          duration: 0.3,
+          ease: "power2.out",
+        });
       }
       lastY = currentY;
     };
@@ -84,7 +97,11 @@ export default function Navbar() {
       <header
         ref={navbarref}
         className="w-full backdrop-blur-md sticky top-0 z-50 transition-colors duration-500"
-        style={{ opacity: 0, transform: "translateY(-100px)", backgroundColor: navBg }}
+        style={{
+          opacity: 0,
+          transform: "translateY(-100px)",
+          backgroundColor: navBg,
+        }}
       >
         <div
           className="px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64 h-20 md:h-30 flex items-center justify-between"
@@ -96,14 +113,20 @@ export default function Navbar() {
             className="text-2xl md:text-4xl font-semibold tracking-tight transition-colors duration-500"
             style={{ color: dark ? "#ec4899" : "#000000" }}
           >
-            Yvaine
+            Palak Agarwal
           </Link>
 
           {/* Desktop Navigation */}
           <nav className="text-xl md:text-3xl hidden md:flex items-center gap-12 lg:gap-24">
-            <Link href="/blogs" className="hover:opacity-70 transition">Blog</Link>
-            <Link href="/fiction" className="hover:opacity-70 transition">Fiction</Link>
-            <Link href="/about" className="hover:opacity-70 transition">About</Link>
+            <Link href="/blogs" className="hover:opacity-70 transition">
+              Blog
+            </Link>
+            <Link href="/fiction" className="hover:opacity-70 transition">
+              Fiction
+            </Link>
+            <Link href="/about" className="hover:opacity-70 transition">
+              About
+            </Link>
           </nav>
 
           {/* Right: dark toggle + CTA + hamburger */}
@@ -114,13 +137,18 @@ export default function Navbar() {
               style={{ borderColor: accent, color: accent }}
             >
               {dark ? <SunIcon /> : <MoonIcon />}
-              <span className="hidden xs:inline">{dark ? "Light" : "Dark"}</span>
+              <span className="hidden xs:inline">
+                {dark ? "Light" : "Dark"}
+              </span>
             </button>
 
             <Link
               href="/contact"
               className="hidden sm:block text-sm md:text-base tracking-widest rounded-2xl px-4 md:px-5 py-2 md:py-2.5 hover:opacity-90 transition-all duration-500"
-              style={{ backgroundColor: dark ? "#ec4899" : "#000", color: "#fff" }}
+              style={{
+                backgroundColor: dark ? "#ec4899" : "#000",
+                color: "#fff",
+              }}
             >
               Get In Touch
             </Link>
@@ -135,7 +163,9 @@ export default function Navbar() {
                 className="block w-6 h-0.5 transition-all duration-300 origin-center"
                 style={{
                   backgroundColor: navText,
-                  transform: menuOpen ? "translateY(4px) rotate(45deg)" : "none",
+                  transform: menuOpen
+                    ? "translateY(4px) rotate(45deg)"
+                    : "none",
                 }}
               />
               <span
@@ -149,7 +179,9 @@ export default function Navbar() {
                 className="block w-6 h-0.5 transition-all duration-300 origin-center"
                 style={{
                   backgroundColor: navText,
-                  transform: menuOpen ? "translateY(-4px) rotate(-45deg)" : "none",
+                  transform: menuOpen
+                    ? "translateY(-4px) rotate(-45deg)"
+                    : "none",
                 }}
               />
             </button>
@@ -185,8 +217,14 @@ export default function Navbar() {
         </nav>
 
         <div className="mt-auto px-8 pb-12">
-          <div className="h-px w-full mb-8" style={{ backgroundColor: dark ? "#2a2a2a" : "#d6cbbf" }} />
-          <p className="text-xs tracking-widest uppercase mb-2" style={{ color: accent }}>
+          <div
+            className="h-px w-full mb-8"
+            style={{ backgroundColor: dark ? "#2a2a2a" : "#d6cbbf" }}
+          />
+          <p
+            className="text-xs tracking-widest uppercase mb-2"
+            style={{ color: accent }}
+          >
             Get in touch
           </p>
           <Link

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Hero from "@/components/home/Hero";
+import Hero from "@/components/home/HeroSection/Hero";
 
 export const metadata: Metadata = {
   title: "Palak Agarwal | Writer, Ghostwriter & Editor",
