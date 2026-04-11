@@ -3,6 +3,7 @@
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { useLoading } from "@/context/LoadingContext";
 import { useDarkMode } from "@/context/DarkModeContext";
 import { usePathname } from "next/navigation";
@@ -21,20 +22,24 @@ const desktopNavLinks = [
   { href: "/about", label: "About" },
 ];
 
+const mobileNavLinks = [
+  { href: "/blogs", label: "Blog" },
+  { href: "/fiction", label: "Fiction" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
+];
+
 const styles = {
-  header:
-    "w-full backdrop-blur-md fixed top-0 z-50 transition-colors duration-500",
-  inner:
-    "page-x h-16 md:h-20 flex items-center justify-between",
-  navPill:
-    "hidden md:flex items-center gap-4 lg:gap-12 px-12 py-2 rounded-full shadow-md",
+  header: "w-full backdrop-blur-md fixed top-0 z-50 transition-colors duration-500",
+  inner: "page-x h-16 md:h-20 flex items-center justify-between",
+  navPill: "hidden md:flex items-center gap-4 lg:gap-12 px-12 py-2 rounded-full shadow-md",
   rightGroup: "flex items-center gap-3",
 };
 
 export default function Navbar() {
   const navbarRef = useRef<HTMLElement>(null);
   const { loaded } = useLoading();
-  const { pink, togglePink } = useDarkMode();
+  const { dark, pink, togglePink } = useDarkMode();
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
 
@@ -86,10 +91,7 @@ export default function Navbar() {
         <div className={styles.inner} style={{ color: "var(--nav-text)" }}>
           <NavLogo text="Palak Agarwal" />
 
-          <nav
-            className={styles.navPill}
-            style={{ border: "1px solid var(--border)" }}
-          >
+          <nav className={styles.navPill} style={{ border: "1px solid var(--border)" }}>
             {desktopNavLinks.map(({ href, label }) => (
               <NavLink key={href} href={href} label={label} />
             ))}
@@ -108,10 +110,7 @@ export default function Navbar() {
                 backgroundColor: pink ? "rgba(236,72,153,0.08)" : "transparent",
               }}
             >
-              <span
-                className="w-2.5 h-2.5 rounded-full"
-                style={{ backgroundColor: "#ec4899" }}
-              />
+              <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: "#ec4899" }} />
               Pink
             </button>
 
@@ -119,11 +118,57 @@ export default function Navbar() {
             <HamburgerMenu
               menuOpen={menuOpen}
               onToggle={() => setMenuOpen((o) => !o)}
-              onClose={() => setMenuOpen(false)}
             />
           </div>
         </div>
       </header>
+
+      {/* Mobile menu overlay — outside <header> so it's not capped by z-50 stacking context */}
+      <div
+        className="fixed inset-0 z-70 md:hidden flex flex-col transition-opacity duration-300"
+        style={{
+          backgroundColor: dark ? "#0f0f0f" : "#f7f3ee",
+          color: "var(--text)",
+          opacity: menuOpen ? 1 : 0,
+          pointerEvents: menuOpen ? "auto" : "none",
+        }}
+      >
+        {/* Top bar with close button */}
+        <div className="h-16 flex items-center justify-end page-x">
+          <button
+            onClick={() => setMenuOpen(false)}
+            className="w-9 h-9 flex items-center justify-center rounded-full transition-opacity hover:opacity-60"
+            style={{ border: "1px solid var(--border)" }}
+            aria-label="Close menu"
+          >
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <line x1="1" y1="1" x2="13" y2="13" />
+              <line x1="13" y1="1" x2="1" y2="13" />
+            </svg>
+          </button>
+        </div>
+
+        <nav className="flex flex-col px-8 pt-10 gap-8">
+          {mobileNavLinks.map(({ href, label }) => (
+            <NavLink key={href} href={href} label={label} mobile onClick={() => setMenuOpen(false)} />
+          ))}
+        </nav>
+
+        <div className="mt-auto px-8 pb-12">
+          <div className="h-px w-full mb-8" style={{ backgroundColor: "var(--border)" }} />
+          <p className="text-xs tracking-widest uppercase mb-2" style={{ color: "var(--accent)" }}>
+            Get in touch
+          </p>
+          <Link
+            href="/contact"
+            className="inline-block text-lg font-semibold"
+            style={{ color: "var(--text)" }}
+            onClick={() => setMenuOpen(false)}
+          >
+            Start a project →
+          </Link>
+        </div>
+      </div>
     </>
   );
 }
