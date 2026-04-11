@@ -40,11 +40,11 @@ export default function BlogListClient({ blogs }: { blogs: Blog[] }) {
           <div>
             <h1 className="text-6xl md:text-8xl font-bold tracking-tight leading-none">
               Blog
-              <sup className="text-xl md:text-2xl font-light ml-2" style={{ color: muted }}>
+              <sup className="text-xl md:text-2xl font-light ml-2" style={{ color: "var(--muted)" }}>
                 ({blogs.length})
               </sup>
             </h1>
-            <p className="mt-4 text-base max-w-sm leading-relaxed" style={{ color: muted }}>
+            <p className="mt-4 text-base max-w-sm leading-relaxed" style={{ color: "var(--muted)" }}>
               Here&apos;s where I share my thoughts, insights, and growth.
               New article monthly, released towards the end of every month.
             </p>
