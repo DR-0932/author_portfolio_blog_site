@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const styles = {
   wrapper:
-    "relative pb-16 md:pb-56 px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64",
+    "relative pb-16 md:pb-56 page-x",
 
   spacer:
     "p-16 md:p-34",

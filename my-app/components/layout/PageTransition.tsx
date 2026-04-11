@@ -25,7 +25,7 @@ export default function PageTransition({ children }: { children: React.ReactNode
     prevPathname.current = pathname;
 
     // Skip strips when navigating within /fiction
-    if (prev.startsWith("/fiction") && pathname.startsWith("/fiction")) {
+    if (prev.startsWith("/fiction/") && pathname.startsWith("/fiction/")) {
       isAnimating.current = false;
       return;
     }

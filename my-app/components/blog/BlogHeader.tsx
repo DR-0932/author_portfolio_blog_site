@@ -28,7 +28,7 @@ export default function BlogHeader({
   const badgeBg = dark ? "#1e1e1e" : "#ede0d0";
 
   return (
-    <header className="px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64 pt-20 pb-10">
+    <header className="page-x pt-20 pb-10">
 
       {/* Category badge */}
       {category && (

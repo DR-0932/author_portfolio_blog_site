@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from "react";
 import { type Sample } from "@/components/home/WorkSampleCard";
 import SampleCard from "@/components/home/sampleCardModal";
 import gsap from "gsap";
-import { useDarkMode } from "@/context/DarkModeContext";
 
 const demoSamples: (Sample & { service: string; image: string })[] = [
   {
@@ -41,10 +40,10 @@ const demoSamples: (Sample & { service: string; image: string })[] = [
 ];
 
 const styles = {
-  wrapper: "w-full px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64 py-24 ",
+  wrapper: "w-full page-x py-12 md:py-20",
 
   headingWrapper: "mb-8 md:mb-12",
-  heading: "text-5xl md:text-8xl font-bold tracking-tight inline",
+  heading: "text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight inline",
   count: "text-lg md:text-2xl font-light text-stone-400 ml-2",
 
   body: "grid grid-cols-1 md:grid-cols-[1fr_2.5fr] gap-8",
@@ -66,8 +65,11 @@ const styles = {
   rowTitle: "text-lg md:text-3xl font-light tracking-wide inline-block",
 };
 
+function getCSSVar(name: string) {
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+}
+
 export default function WorkSample2() {
-  const { dark } = useDarkMode();
   const [samples, setSamples] = useState(demoSamples);
   const [active, setActive] = useState<Sample | null>(null);
   const [hoveredImage, setHoveredImage] = useState<string | null>(null);
@@ -108,7 +110,7 @@ export default function WorkSample2() {
     });
 
     gsap.to(rowRefs.current[index], {
-      backgroundColor: dark ? "#ec4899" : "#AE572C",
+      backgroundColor: getCSSVar("--accent"),
       color: "#ffffff",
       duration: 0.25,
     });
@@ -131,7 +133,7 @@ export default function WorkSample2() {
 
     gsap.to(rowRefs.current[index], {
       backgroundColor: "transparent",
-      color: dark ? "#f0f0f0" : "#000000",
+      color: getCSSVar("--text"),
       duration: 0.25,
     });
   };
@@ -152,7 +154,7 @@ export default function WorkSample2() {
             <p className={styles.sidebarLabel}>About</p>
             <p
               className={styles.sidebarText}
-              style={{ color: dark ? "#a0a0a0" : "#44403c" }}
+              style={{ color: "var(--muted)" }}
             >
               Here&apos;s a sample of my writing. Includes projects I&apos;ve
               done in the past.
@@ -189,7 +191,7 @@ export default function WorkSample2() {
               className={styles.row}
               style={{
                 backgroundColor: "transparent",
-                color: dark ? "#f0f0f0" : "#000000",
+                color: "var(--text)",
               }}
               onClick={() => setActive(sample)}
               onMouseEnter={() => handleRowEnter(index, sample.image)}

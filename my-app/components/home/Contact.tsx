@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 const styles = {
-  wrapper: "w-full py-16 md:py-40 px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64",
+  wrapper: "w-full py-16 md:py-40 page-x",
 
   container: "grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-start",
 
@@ -82,8 +82,8 @@ export default function Contact() {
           <p className={styles.tagline}>
             For commissions and project inquiries, please email:
           </p>
-          <a href="mailto:palak@example.com" className={styles.emailLink}>
-            palakagarwal1002@gmail.com
+          <a href="mailto:junepalak@gmail.com" className={styles.emailLink}>
+            junepalak@gmail.com
           </a>
           <span className={styles.subtext}>
             or send a message via this form

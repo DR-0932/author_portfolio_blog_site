@@ -1,7 +1,5 @@
 "use client";
 
-import { useDarkMode } from "@/context/DarkModeContext";
-
 const items = [
   "Writing",
   "Editing",
@@ -21,45 +19,28 @@ const SEP = "·";
 
 const styles = {
   wrapper: "w-full overflow-hidden",
-  row: "flex w-max py-3 md:py-4",
-  item: "flex items-center gap-5 md:gap-8 whitespace-nowrap px-5 md:px-8 text-sm md:text-lg tracking-[0.25em] uppercase font-bold --font-script",
-  sep: "text-xl ",
+  row: "flex w-max py-2 md:py-3",
+  item: "flex items-center gap-5 md:gap-8 whitespace-nowrap px-5 md:px-8 text-xs md:text-sm tracking-[0.25em] uppercase font-medium",
+  sep: "text-base",
 };
 
+const gray = "#9ca3af";
+const sepGray = "#d1d5db";
+
 export default function Marquee() {
-  const { dark } = useDarkMode();
-
-  const bg = dark ? "#161616" : "#1a1a1a";
-  const text = dark ? "#f5f0e8" : "#AE572C";
-  const sepColor = dark ? "#e8b87a" : "#AE572C";
-
   const row = [...items, ...items];
 
   return (
-    <div className={styles.wrapper} style={{ backgroundColor: bg }}>
-      {/* Row 1 — left to right */}
+    <div className={styles.wrapper} style={{ backgroundColor: "transparent" }}>
       <div className={`${styles.row} animate-marquee`}>
         {row.map((item, i) => (
-          <span key={i} className={styles.item} style={{ color: text }}>
+          <span key={i} className={styles.item} style={{ color: gray }}>
             {item}
-            <span style={{ color: sepColor }} className={styles.sep}>
-              {SEP}
-            </span>
+            <span style={{ color: sepGray }} className={styles.sep}>{SEP}</span>
           </span>
         ))}
       </div>
 
-      {/* Row 2 — right to left */}
-      <div className={`${styles.row} animate-marquee-reverse`}>
-        {row.map((item, i) => (
-          <span key={i} className={styles.item} style={{ color: text }}>
-            {item}
-            <span style={{ color: sepColor }} className={styles.sep}>
-              {SEP}
-            </span>
-          </span>
-        ))}
-      </div>
     </div>
   );
 }

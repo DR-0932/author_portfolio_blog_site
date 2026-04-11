@@ -23,7 +23,7 @@ const styles = {
 
   progressBar: "h-full transition-all duration-100",
 
-  body: "pb-32 px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64",
+  body: "pb-32 page-x",
 
   bodyInner: "flex gap-16 items-start",
 

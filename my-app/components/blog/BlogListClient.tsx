@@ -41,7 +41,7 @@ export default function BlogListClient({ blogs }: { blogs: Blog[] }) {
       className="min-h-screen transition-colors duration-500"
       style={{ backgroundColor: dark ? "#0f0f0f" : "transparent", color: text }}
     >
-      <div className="px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64 pt-20 pb-32">
+      <div className="page-x pt-20 pb-32">
 
         {/* Top bar */}
         <div className="flex items-start justify-between mb-16">

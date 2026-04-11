@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Poppins, Roboto_Mono, Great_Vibes, Caveat, Playwrite_IE, Fjalla_One } from "next/font/google";
 import ClientRoot from "@/components/layout/ClientRoot";
 import "./globals.css";
@@ -39,6 +39,12 @@ const fjallaOne = Fjalla_One({
 
 const BASE_URL = "https://author-portfolio-blog-site.vercel.app";
 const OG_IMAGE = `${BASE_URL}/image.png`;
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
