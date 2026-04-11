@@ -3,7 +3,6 @@
 import { useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import gsap from "gsap";
-import { useDarkMode } from "@/context/DarkModeContext";
 import FloatingBook from "@/components/ui/FloatingBook";
 
 type Chapter = { title: string; body: string };
@@ -91,7 +90,6 @@ export default function FictionListClient({
 }: {
   fictions: Fiction[];
 }) {
-  const { dark } = useDarkMode();
   const router = useRouter();
   const pageRef = useRef<HTMLDivElement>(null);
   const fictions = raw.length > 0 ? raw : demoFictions;
@@ -104,56 +102,33 @@ export default function FictionListClient({
     );
   }, []);
 
-  function navigate(slug: string) {
-    gsap.to(pageRef.current, {
-      opacity: 0,
-      y: -20,
-      duration: 0.35,
-      ease: "power3.in",
-      onComplete: () => router.push(`/fiction/${slug}`),
-    });
-  }
-
-  const pageText = dark ? "#e0ddd8" : "#1a1a1a";
-  const muted    = dark ? "#555"    : "#78716c";
-  const accent   = dark ? "#ec4899" : "#AE572C";
-  const border   = dark ? "#2a2a2a" : "#e5ddd4";
-
   return (
     <div
       ref={pageRef}
-      className="min-h-screen transition-colors duration-500 relative"
-      style={{ color: pageText }}
+      className="min-h-screen transition-colors duration-500"
+      style={{ backgroundColor: "var(--bg)", color: "var(--text)" }}
     >
-      {/* Background image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/fictionassests/end-road-with-beautiful-rainbow-after-rainy-weather.jpg')" }}
-      />
-
-      <div className="relative page-x pt-24 pb-40">
+      <div className="page-x pt-24 pb-40">
 
         {/* ── Hero ── */}
         <div
           className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-6 pb-10"
-          style={{ borderBottom: `1px solid ${border}` }}
+          style={{ borderBottom: "1px solid var(--border)" }}
         >
-          <div>
-            <h1
-              className="leading-none"
-              style={{
-                fontFamily: "var(--font-script)",
-                fontSize: "clamp(4rem, 10vw, 7rem)",
-              }}
-            >
-              Fiction
-            </h1>
-          </div>
+          <h1
+            className="leading-none"
+            style={{
+              fontFamily: "var(--font-script)",
+              fontSize: "clamp(4rem, 10vw, 7rem)",
+            }}
+          >
+            Fiction
+          </h1>
           <p
             className="text-sm leading-relaxed max-w-xs sm:text-right pb-1 px-4 py-3 rounded-xl"
             style={{
-              color: pageText,
-              backgroundColor: dark ? "rgba(0,0,0,0.55)" : "rgba(255,255,255,0.55)",
+              color: "var(--text)",
+              backgroundColor: "color-mix(in srgb, var(--bg-card) 70%, transparent)",
               backdropFilter: "blur(10px)",
               WebkitBackdropFilter: "blur(10px)",
             }}
@@ -165,7 +140,7 @@ export default function FictionListClient({
 
         {/* ── List ── */}
         {fictions.length === 0 ? (
-          <p className="py-32 text-center text-sm" style={{ color: muted }}>
+          <p className="py-32 text-center text-sm" style={{ color: "var(--muted)" }}>
             No fiction published yet.
           </p>
         ) : (
@@ -173,12 +148,12 @@ export default function FictionListClient({
             {fictions.map((f, i) => (
               <div
                 key={f._id}
-                onClick={() => navigate(f.slug)}
-                className="group flex flex-col sm:flex-row items-center sm:items-start gap-10 md:gap-16 py-14 cursor-pointer"
-                style={{ borderBottom: `1px solid ${border}` }}
+                onClick={() => router.push(`/fiction/${f.slug}`)}
+                className="group flex flex-col sm:flex-row items-center sm:items-start gap-6 sm:gap-10 md:gap-16 py-8 sm:py-12 cursor-pointer"
+                style={{ borderBottom: "1px solid var(--border)" }}
               >
                 {/* Left — 3D book */}
-                <div className="shrink-0 transition-transform duration-500 group-hover:-translate-y-2">
+                <div className="shrink-0 transition-transform duration-500 group-hover:-translate-y-2 scale-90 sm:scale-100 origin-top">
                   <FloatingBook
                     color={bookColors[i % bookColors.length]}
                     title={f.title}
@@ -191,19 +166,18 @@ export default function FictionListClient({
 
                 {/* Right — info */}
                 <div
-                  className="flex flex-col justify-center gap-4 sm:pt-2 text-center sm:text-left rounded-2xl px-6 py-5"
+                  className="flex flex-col justify-center gap-3 sm:gap-4 sm:pt-2 text-center sm:text-left rounded-2xl px-4 sm:px-6 py-4 sm:py-5 w-full"
                   style={{
-                    backgroundColor: dark ? "rgba(0,0,0,0.55)" : "rgba(255,255,255,0.55)",
+                    backgroundColor: "color-mix(in srgb, var(--bg-card) 70%, transparent)",
                     backdropFilter: "blur(10px)",
                     WebkitBackdropFilter: "blur(10px)",
                   }}
                 >
-
                   {/* Index + genre pill */}
                   <div className="flex items-center gap-3 justify-center sm:justify-start">
                     <span
                       className="text-xs font-mono tracking-widest"
-                      style={{ color: muted, opacity: 0.5 }}
+                      style={{ color: "var(--muted)", opacity: 0.5 }}
                     >
                       {String(i + 1).padStart(2, "0")}
                     </span>
@@ -222,15 +196,15 @@ export default function FictionListClient({
                   {/* Title */}
                   <h2
                     className="leading-tight font-bold"
-                    style={{ fontSize: "clamp(1.6rem, 3.5vw, 2.8rem)" }}
+                    style={{ fontSize: "clamp(1.4rem, 5vw, 2.8rem)" }}
                   >
                     {f.title}
                   </h2>
 
-                  {/* Author + stats row */}
+                  {/* Stats row */}
                   <div
                     className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm font-medium justify-center sm:justify-start"
-                    style={{ color: pageText, opacity: 0.6 }}
+                    style={{ color: "var(--text)", opacity: 0.6 }}
                   >
                     <span>{readingTime(f.chapters)} min read</span>
                     <span style={{ opacity: 0.4 }}>·</span>
@@ -240,17 +214,14 @@ export default function FictionListClient({
                   </div>
 
                   {/* Excerpt */}
-                  <p
-                    className="text-base leading-relaxed max-w-xl"
-                    style={{ color: pageText, opacity: 0.75 }}
-                  >
+                  <p className="text-sm sm:text-base leading-relaxed max-w-xl" style={{ color: "var(--text)", opacity: 0.75 }}>
                     {excerpt(f.chapters)}
                   </p>
 
                   {/* CTA */}
                   <span
                     className="text-xs tracking-widest uppercase font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300 self-center sm:self-start"
-                    style={{ color: accent }}
+                    style={{ color: "var(--accent)" }}
                   >
                     Read story →
                   </span>

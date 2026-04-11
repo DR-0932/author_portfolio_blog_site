@@ -2,7 +2,6 @@
 import { useRef, useState } from "react";
 import Link from "next/link";
 import gsap from "gsap";
-import { useDarkMode } from "@/context/DarkModeContext";
 import CategoryFilter from "@/components/ui/CategoryFilter";
 
 type Blog = {
@@ -16,21 +15,14 @@ type Blog = {
 
 
 export default function BlogListClient({ blogs }: { blogs: Blog[] }) {
-  const { dark } = useDarkMode();
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const rowRefs = useRef<(HTMLAnchorElement | null)[]>([]);
-
-  const accent = dark ? "#ec4899" : "#AE572C";
-  const text = dark ? "#f5f5f5" : "#111111";
-  const muted = dark ? "#888" : "#6b7280";
-  const borderColor = dark ? "#2a2a2a" : "#d6cbbf";
-  const rowHoverBg = dark ? "#1a1a1a" : "#e8d5c0";
 
   const categories = Array.from(new Set(blogs.map((b) => b.category).filter(Boolean)));
   const filtered = activeCategory ? blogs.filter((b) => b.category === activeCategory) : blogs;
 
   const handleRowEnter = (i: number) => {
-    gsap.to(rowRefs.current[i], { backgroundColor: rowHoverBg, x: 6, duration: 0.25, ease: "power2.out" });
+    gsap.to(rowRefs.current[i], { backgroundColor: "var(--bg-accent)", x: 6, duration: 0.25, ease: "power2.out" });
   };
   const handleRowLeave = (i: number) => {
     gsap.to(rowRefs.current[i], { backgroundColor: "transparent", x: 0, duration: 0.25, ease: "power2.out" });
@@ -39,7 +31,7 @@ export default function BlogListClient({ blogs }: { blogs: Blog[] }) {
   return (
     <div
       className="min-h-screen transition-colors duration-500"
-      style={{ backgroundColor: dark ? "#0f0f0f" : "transparent", color: text }}
+      style={{ color: "var(--text)" }}
     >
       <div className="page-x pt-20 pb-32">
 
@@ -71,7 +63,7 @@ export default function BlogListClient({ blogs }: { blogs: Blog[] }) {
         {/* Table header */}
         <div
           className="grid grid-cols-[5rem_1fr] sm:grid-cols-[9rem_1fr_9rem] pb-3 mb-1 border-b text-xs tracking-[0.2em] uppercase"
-          style={{ borderColor, color: muted }}
+          style={{ borderColor: "var(--border)", color: "var(--muted)" }}
         >
           <span>Date</span>
           <span>Title</span>
@@ -80,7 +72,7 @@ export default function BlogListClient({ blogs }: { blogs: Blog[] }) {
 
         {/* Rows */}
         {filtered.length === 0 ? (
-          <p className="py-24 text-center text-sm" style={{ color: muted }}>
+          <p className="py-24 text-center text-sm" style={{ color: "var(--muted)" }}>
             No blogs published yet.
           </p>
         ) : (
@@ -90,11 +82,11 @@ export default function BlogListClient({ blogs }: { blogs: Blog[] }) {
               href={`/blogs/${blog.slug}`}
               ref={(el) => { rowRefs.current[i] = el; }}
               className="grid grid-cols-[5rem_1fr] sm:grid-cols-[9rem_1fr_9rem] items-center border-b py-5 sm:py-7 transition-colors duration-200"
-              style={{ borderColor }}
+              style={{ borderColor: "var(--border)" }}
               onMouseEnter={() => handleRowEnter(i)}
               onMouseLeave={() => handleRowLeave(i)}
             >
-              <span className="text-xs tracking-widest tabular-nums" style={{ color: muted }}>
+              <span className="text-xs tracking-widest tabular-nums" style={{ color: "var(--muted)" }}>
                 {new Date(blog.createdAt).toLocaleDateString("en-US", {
                   year: "numeric",
                   month: "2-digit",
@@ -106,7 +98,7 @@ export default function BlogListClient({ blogs }: { blogs: Blog[] }) {
               </span>
               <span
                 className="hidden sm:block text-xs tracking-[0.15em] uppercase text-right"
-                style={{ color: accent }}
+                style={{ color: "var(--accent)" }}
               >
                 {blog.category}
               </span>

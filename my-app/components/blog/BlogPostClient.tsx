@@ -44,33 +44,6 @@ function readingTime(content: string) {
   return Math.max(1, Math.ceil(content.split(/\s+/).length / 200));
 }
 
-function DarkToggle({
-  dark,
-  onToggle,
-}: {
-  dark: boolean;
-  onToggle: () => void;
-}) {
-  const accent = dark ? "#ec4899" : "#AE572C";
-  return (
-    <button
-      onClick={onToggle}
-      className="flex items-center gap-2 text-xs tracking-widest uppercase px-4 py-2 rounded-full border transition-colors duration-300"
-      style={{ borderColor: accent, color: accent }}
-    >
-      {dark ? (
-        <svg viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5">
-          <path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z" />
-        </svg>
-      ) : (
-        <svg viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5">
-          <path d="M12 7a5 5 0 1 1 0 10A5 5 0 0 1 12 7zm0-5a1 1 0 0 1 1 1v2a1 1 0 0 1-2 0V3a1 1 0 0 1 1-1zm0 16a1 1 0 0 1 1 1v2a1 1 0 0 1-2 0v-2a1 1 0 0 1 1-1zM4.22 5.64a1 1 0 0 1 1.42-1.42l1.41 1.42a1 1 0 0 1-1.41 1.41L4.22 5.64zm12.72 12.72a1 1 0 0 1 1.41-1.41l1.42 1.41a1 1 0 1 1-1.42 1.42l-1.41-1.42zM2 12a1 1 0 0 1 1-1h2a1 1 0 0 1 0 2H3a1 1 0 0 1-1-1zm17 0a1 1 0 0 1 1-1h2a1 1 0 0 1 0 2h-2a1 1 0 0 1-1-1zM5.64 19.78a1 1 0 0 1-1.42-1.42l1.42-1.41a1 1 0 1 1 1.41 1.41l-1.41 1.42zM18.36 6.36a1 1 0 0 1-1.41-1.41l1.41-1.42a1 1 0 1 1 1.42 1.42l-1.42 1.41z" />
-        </svg>
-      )}
-      {dark ? "Light" : "Dark"}
-    </button>
-  );
-}
 
 export default function BlogPostClient({
   blog,
@@ -83,12 +56,6 @@ export default function BlogPostClient({
   const [progress, setProgress] = useState(0);
   const [activeId, setActiveId] = useState<string>("");
   const articleRef = useRef<HTMLDivElement>(null);
-
-  const accent = dark ? "#ec4899" : "#AE572C";
-  const text = dark ? "#f0f0f0" : "#111111";
-  const muted = dark ? "#ec4899" : "#6b7280";
-  const tocLabel = dark ? "#ec489980" : "#6b7280";
-  const tocBg = dark ? "#161616" : "#f0e6d3";
   const mins = readingTime(blog.content);
 
   // Reading progress
@@ -130,16 +97,16 @@ export default function BlogPostClient({
   return (
     <div
       className={styles.wrapper}
-      style={{ backgroundColor: dark ? "#0f0f0f" : "transparent", color: text }}
+      style={{ color: "var(--text)" }}
     >
       {/* Reading progress bar */}
       <div
         className={styles.progressTrack}
-        style={{ backgroundColor: dark ? "#222" : "#e5d9cb" }}
+        style={{ backgroundColor: "var(--border)" }}
       >
         <div
           className={styles.progressBar}
-          style={{ width: `${progress}%`, backgroundColor: accent }}
+          style={{ width: `${progress}%`, backgroundColor: "var(--accent)" }}
         />
       </div>
 
@@ -157,7 +124,7 @@ export default function BlogPostClient({
         coverImage={blog.image}
         dark={dark}
         readingTime={mins}
-        accent={accent}
+        accent="var(--accent)"
       />
 
       {/* Content + TOC */}
@@ -168,9 +135,9 @@ export default function BlogPostClient({
             <aside className={styles.toc}>
               <div
                 className={styles.tocCard}
-                style={{ backgroundColor: tocBg }}
+                style={{ backgroundColor: "var(--bg-accent)" }}
               >
-                <p className={styles.tocLabel} style={{ color: tocLabel }}>
+                <p className={styles.tocLabel} style={{ color: "var(--muted)" }}>
                   On this page
                 </p>
                 <ul className={styles.tocList}>
@@ -180,7 +147,7 @@ export default function BlogPostClient({
                         href={`#${id}`}
                         className={styles.tocLink}
                         style={{
-                          color: activeId === id ? accent : muted,
+                          color: activeId === id ? "var(--accent)" : "var(--muted)",
                           fontWeight: activeId === id ? 600 : 400,
                         }}
                       >
@@ -195,7 +162,7 @@ export default function BlogPostClient({
 
           {/* Blog content */}
           <div className={styles.content}>
-            <BlogContent content={blog.content} dark={dark} accent={accent} />
+            <BlogContent content={blog.content} dark={dark} accent="var(--accent)" />
           </div>
         </div>
       </div>
