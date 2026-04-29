@@ -98,7 +98,7 @@ export default function WorkExperience() {
             style={{ height: lineHeight, backgroundColor: accent }}
           />
 
-          {/* Mobile + desktop inner wrapper */}
+          {/*  inner wrapper */}
           <div className="relative pl-7 md:pl-0">
 
             {/* Mobile left track line */}
@@ -122,7 +122,7 @@ export default function WorkExperience() {
                   style={{ backgroundColor: accent, boxShadow: dotShadow }}
                 />
 
-                {/* Date — mobile: above content, desktop: left column */}
+                {/* Date  mobile: above content, desktop: left column */}
                 <div className="flex md:justify-end items-start md:pr-8 mb-2 md:mb-0">
                   <p
                     className="text-xs md:text-xl font-semibold leading-snug tracking-wide md:sticky md:top-[50vh] md:text-right"
