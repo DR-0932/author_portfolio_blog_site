@@ -3,10 +3,7 @@ import { FictionModel } from "../../db.js";
 
 const router = Router();
 
-/*
-  PUBLIC — GET ALL PUBLISHED FICTION
-  GET /fiction
-*/
+
 router.get("/", async (_req, res) => {
   try {
     const fictionList = await FictionModel
@@ -22,10 +19,7 @@ router.get("/", async (_req, res) => {
   }
 });
 
-/*
-  PUBLIC — GET SINGLE FICTION BY SLUG
-  GET /fiction/:slug
-*/
+
 router.get("/:slug", async (req, res) => {
   try {
     const fiction = await FictionModel.findOne({
