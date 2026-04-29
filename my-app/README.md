@@ -1,18 +1,18 @@
 ✍️ Author Portfolio
 A full-stack author portfolio website featuring animated UI, a public blog, a fiction section, and a secure admin panel for content management.
 
-Tech Stack
-Frontend
-Next.js 14 (App Router)  Framework & routing
-TypeScript               Type safety
-GSAP                     Animations & page transitions
-Tailwind                 CSS Styling
+//----Tech Stack------//
+Frontend:
+Next.js 14 (App Router),  
+TypeScript ,              
+GSAP   ,                  
+Tailwind   ,              
 
-Backend
-Node.js         Runtime 
-Express.js      REST API server
-TypeScript      Type safety
-MongoDB         Database
+Backend:
+Node.js ,       
+Express.js,      
+TypeScript ,     
+MongoDB ,        
 
 
 ✨ Features
