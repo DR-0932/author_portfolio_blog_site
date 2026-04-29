@@ -19,7 +19,7 @@ function applyClasses(dark: boolean, pink: boolean) {
   const html = document.documentElement;
   html.classList.toggle("dark", dark);
   html.classList.toggle("pink", pink);
-  // keep body.dark for admin page backward-compat
+  //  body.dark for admin page backward-compat
   document.body.classList.toggle("dark", dark);
 }
 
