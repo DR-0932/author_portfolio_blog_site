@@ -4,10 +4,7 @@ import { adminMiddleware } from "../../middleware/admin.middleware.js";
 
 const router = Router();
 
-/*
-  ADMIN — GET ALL BLOGS
-  GET /admin/blog
-*/
+
 router.get("/", adminMiddleware, async (_req, res) => {
   try {
     const blogs = await BlogModel.find().sort({ createdAt: -1 });
@@ -17,10 +14,7 @@ router.get("/", adminMiddleware, async (_req, res) => {
   }
 });
 
-/*
-  ADMIN — CREATE BLOG
-  POST /admin/blog
-*/
+
 router.post("/", adminMiddleware ,async (req, res) => {
   try {
     const { title, slug, content, published } = req.body;
@@ -54,10 +48,7 @@ router.post("/", adminMiddleware ,async (req, res) => {
   }
 });
 
-/*
-  ADMIN — UPDATE BLOG
-  PUT /admin/blog/:id
-*/
+
 router.put("/:id", adminMiddleware, async (req, res) => {
   try {
     const { id } = req.params;
@@ -89,10 +80,7 @@ router.put("/:id", adminMiddleware, async (req, res) => {
   }
 });
 
-/*
-  ADMIN — DELETE BLOG
-  DELETE /admin/blog/:id
-*/
+
 router.delete("/:id",adminMiddleware, async (req, res) => {
   try {
     const { id } = req.params;
