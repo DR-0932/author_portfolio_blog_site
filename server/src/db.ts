@@ -16,7 +16,7 @@ export const connectDB = async () => {
   }
 };
 
-/* ================= BLOG SCHEMA ================= */
+/*  BLOG SCHEMA */
 
 const blogSchema = new Schema(
   {
@@ -65,7 +65,7 @@ const blogSchema = new Schema(
 );
 
 
-/* ================= FICTION SCHEMA ================= */
+/* FICTION SCHEMA  */
 
 const chapterSchema = new Schema(
   {
@@ -102,18 +102,15 @@ const fictionSchema = new Schema(
   }
 );
 
-/* ================= ABOUT ME ================= */
+/*  ABOUT ME  */
 
 const aboutMeSchema = new Schema(
-  {
-    // add fields later
-  },
   {
     timestamps: true
   }
 );
 
-/* ================= WORK SAMPLE SCHEMA ================= */
+/*  WORK SAMPLE SCHEMA  */
 
 const workSampleSchema = new Schema(
   {
@@ -124,7 +121,7 @@ const workSampleSchema = new Schema(
   { timestamps: true }
 )
 
-/* ================= MODELS ================= */
+/*  MODELS  */
 
 export const BlogModel = mongoose.model("Blog", blogSchema);
 export const FictionModel = mongoose.model("Fiction", fictionSchema);
