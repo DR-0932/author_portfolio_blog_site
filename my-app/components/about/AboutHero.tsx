@@ -16,10 +16,10 @@ export default function AboutHero() {
     <section className="page-x pt-12 md:pt-20 pb-10 md:pb-16">
       <div className="grid grid-cols-1 md:grid-cols-[1fr_280px] lg:grid-cols-[1fr_320px] gap-12 md:gap-16 lg:gap-24 items-start">
 
-        {/* ── Left ── */}
+        {/* Left */}
         <div className="flex flex-col">
 
-          {/* Label + rule */}
+          {/* Label rule */}
           <div className="flex items-center gap-4 mb-8">
             <span
               className="text-[10px] tracking-[0.4em] uppercase font-semibold"
@@ -100,7 +100,7 @@ export default function AboutHero() {
 
         </div>
 
-        {/* ── Right ── */}
+        {/* Right */}
         <div className="flex flex-col gap-5 max-w-sm mx-auto md:mx-0 w-full">
 
           {/* Arch photo */}
