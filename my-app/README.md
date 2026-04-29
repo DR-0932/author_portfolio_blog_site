@@ -1,7 +1,7 @@
 ✍️ Author Portfolio
 A full-stack author portfolio website featuring animated UI, a public blog, a fiction section, and a secure admin panel for content management.
 
-//----Tech Stack------//
+//----Tech Stack------//,
 Frontend:
 Next.js 14 (App Router),  
 TypeScript ,              
