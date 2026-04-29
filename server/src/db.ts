@@ -1,130 +1,109 @@
-import mongoose, { Schema } from "mongoose";
+import { Router } from "express";
+import { BlogModel } from "../../db.js";
+import { adminMiddleware } from "../../middleware/admin.middleware.js";
 
-export const connectDB = async () => {
+const router = Router();
+
+
+router.get("/", adminMiddleware, async (_req, res) => {
   try {
-    const uri = process.env.MONGO_URI;
-
-    if (!uri) {
-      throw new Error("MONGO_URI not found in .env");
-    }
-
-    await mongoose.connect(uri);
-    console.log("MongoDB connected");
+    const blogs = await BlogModel.find().sort({ createdAt: -1 });
+    res.json({ blogs });
   } catch (e) {
-    console.error("DB connection error:", e);
-    process.exit(1);
+    res.status(500).json({ message: "Error fetching blogs" });
   }
-};
+});
 
-/*  BLOG SCHEMA */
 
-const blogSchema = new Schema(
-  {
-    title: {
-      type: String,
-      required: true,
-      maxlength: 200
-    },
-    slug: {
-      type: String,
-      required: true,
-      unique: true,
-      maxlength: 200
-    },
-    excerpt: {
-      type: String,
-      maxlength: 500,
-      default: ""
-    },
-    content: {
-      type: String,
-      required: true,
-      maxlength: 50000
-    },
-    image: {
-      type: String,
-      default: ""
-    },
-    category: {
-      type: String,
-      maxlength: 100,
-      default: ""
-    },
-    published: {
-      type: Boolean,
-      default: false
-    },
-    views: {
-      type: Number,
-      default: 0
+
+router.post("/", adminMiddleware ,async (req, res) => {
+  try {
+    const { title, slug, content, published } = req.body;
+
+    if (!title || !slug || !content) {
+      return res.status(400).json({
+        message: "title, slug and content are required"
+      });
     }
-  },
-  {
-    timestamps: true
-  }
-);
 
-
-/* FICTION SCHEMA  */
-
-const chapterSchema = new Schema(
-  {
-    title: { type: String, required: true, maxlength: 200 },
-    body:  { type: String, default: "", maxlength: 200000 },
-  },
-  { _id: true }
-);
-
-const fictionSchema = new Schema(
-  {
-    title: {
-      type: String,
-      required: true,
-      maxlength: 200
-    },
-    slug: {
-      type: String,
-      required: true,
-      unique: true,
-      maxlength: 200
-    },
-    chapters: {
-      type: [chapterSchema],
-      default: []
-    },
-    published: {
-      type: Boolean,
-      default: false
+    const existing = await BlogModel.findOne({ slug });
+    if (existing) {
+      return res.status(400).json({
+        message: "Slug already exists"
+      });
     }
-  },
-  {
-    timestamps: true
+
+    const blog = await BlogModel.create({
+      title,
+      slug,
+      content,
+      published
+    });
+
+    res.status(201).json({
+      message: "Blog created",
+      blog
+    });
+  } catch (e) {
+    res.status(500).json({ message: "Error creating blog" });
   }
-);
+});
 
-/*  ABOUT ME  */
 
-const aboutMeSchema = new Schema(
-  {
-    timestamps: true
+
+router.put("/:id", adminMiddleware, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { title, slug, content, published } = req.body;
+
+    const updatedBlog = await BlogModel.findByIdAndUpdate(
+      id,
+      { title, slug, content, published },
+        {
+          returnDocument: "after",
+          runValidators: true
+        }
+    );
+
+    if (!updatedBlog) {
+      return res.status(404).json({
+        message: "Blog not found"
+      });
+    }
+
+    res.json({
+      message: "Blog updated successfully",
+      blog: updatedBlog
+    });
+  } catch (e) {
+    res.status(500).json({
+      message: "Error updating blog"
+    });
   }
-);
+});
 
-/*  WORK SAMPLE SCHEMA  */
 
-const workSampleSchema = new Schema(
-  {
-    title: { type: String, required: true, maxlength: 200 },
-    text:  { type: String, required: true, maxlength: 50000 },
-    image: { type: String, default: "" },
-  },
-  { timestamps: true }
-)
 
-/*  MODELS  */
+router.delete("/:id",adminMiddleware, async (req, res) => {
+  try {
+    const { id } = req.params;
 
-export const BlogModel = mongoose.model("Blog", blogSchema);
-export const FictionModel = mongoose.model("Fiction", fictionSchema);
-export const AboutMeModel = mongoose.model("AboutMe", aboutMeSchema);
-export const WorkSampleModel = mongoose.model("WorkSample", workSampleSchema);
+    const deletedBlog = await BlogModel.findByIdAndDelete(id);
 
+    if (!deletedBlog) {
+      return res.status(404).json({
+        message: "Blog not found"
+      });
+    }
+
+    res.json({
+      message: "Blog deleted successfully"
+    });
+  } catch (e) {
+    res.status(500).json({
+      message: "Error deleting blog"
+    });
+  }
+});
+
+export default router;
