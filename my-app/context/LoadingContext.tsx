@@ -8,6 +8,7 @@ const LoadingContext = createContext<LoadingContextType>({
   markLoaded: () => {},
 });
 
+// Module-level flag: resets on hard reload, survives client-side navigation
 let hasLoaded = false;
 
 export function LoadingProvider({ children }: { children: React.ReactNode }) {
