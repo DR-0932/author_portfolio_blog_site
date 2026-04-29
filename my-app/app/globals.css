@@ -38,12 +38,12 @@
   --nav-bg:        rgba(255,255,255,0.05);
   --nav-text:      #000000;
 
-  /* legacy aliases kept for admin/body compat */
+  /*  aliases  for admin/body */
   --background: #f7f3ee;
   --foreground: #111111;
 }
 
-/* Dark mode — toggled by adding class="dark" to <html> */
+/* Dark mode  */
 html.dark {
   --text:          #f0f0f0;
   --muted:         #777777;
@@ -60,7 +60,7 @@ html.dark {
   --foreground: #f0f0f0;
 }
 
-/* Pink accent — toggled by adding class="pink" to <html> */
+/* Pink accent*/
 html.pink {
   --accent:    #ec4899;
   --bg-accent: #fce7f3;
@@ -91,7 +91,7 @@ body {
 }
 
 
-/* Consistent page gutter used across all sections */
+/*  page gutter */
 .page-x {
   padding-left:  1rem;
   padding-right: 1rem;
@@ -102,7 +102,7 @@ body {
 @media (min-width: 1280px) { .page-x { padding-left: 8rem;   padding-right: 8rem;   } }
 @media (min-width: 1536px) { .page-x { padding-left: 12rem;  padding-right: 12rem;  } }
 
-/* keep body.dark so admin classes still work */
+
 body.dark {
   background: #0f0f0f;
   color: #f0f0f0;
