@@ -24,20 +24,7 @@
   &::-webkit-scrollbar { display: none; }
 }
 
-/* ── Colour tokens ─────────────────────────────────────────────────
-   Edit here to retheme the entire site.
-   --accent      : primary brand colour (buttons, highlights, numbers)
-   --text        : body / heading text
-   --muted       : secondary / caption text
-   --border      : standard dividers
-   --border-subtle: lighter dividers inside sections
-   --bg          : page background
-   --bg-subtle   : slightly off-white section background
-   --bg-card     : card / form surface
-   --bg-accent   : warm tinted panel (CTA boxes, etc.)
-   --nav-bg      : navbar backdrop
-   --nav-text    : navbar link colour
-──────────────────────────────────────────────────────────────────── */
+
 :root {
   --accent:        #AE572C;
   --text:          #111111;
