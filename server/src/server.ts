@@ -30,7 +30,6 @@ app.use("/uploads", express.static(path.join(__dirname, "..", "uploads")));
 
 connectDB();
 
-/* ================= ROUTES ================= */
 
 app.use("/admin/auth", authAdminRouter);
 app.use("/admin/upload", uploadAdminRouter);
@@ -42,7 +41,6 @@ app.use("/fiction", publicFictionRouter);
 app.use("/sample", publicWorkSampleRouter);
 app.use("/contact", contactRouter);
 
-/* ================= SERVER ================= */
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
