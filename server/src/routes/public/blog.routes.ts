@@ -1,14 +1,11 @@
-// src/routes/public/blog.routes.ts
+
 
 import { Router } from "express";
 import { BlogModel } from "../../db.js";
 
 const router = Router();
 
-/*
-  PUBLIC — GET ALL PUBLISHED BLOGS (Paginated + Optimized)
-  GET /blog?page=1
-*/
+
 router.get("/", async (req, res) => {
   try {
     const page = Number(req.query.page) || 1;
@@ -33,11 +30,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-/*
-  PUBLIC — GET SINGLE BLOG BY SLUG
-  GET /blog/:slug
-  (increments views)
-*/
+
 router.get("/:slug", async (req, res) => {
   try {
     const slug = req.params.slug.toLowerCase();
